@@ -9,7 +9,8 @@
     "preview": "vite preview",
     "test.e2e": "cypress run",
     "test.unit": "vitest",
-    "lint": "eslint"
+    "lint": "eslint",
+    "format": "prettier --write ."
   },
   "dependencies": {
     "@capacitor/app": "6.0.0",
@@ -46,6 +47,7 @@
     "terser": "^5.4.0",
     "typescript": "^5.1.6",
     "vite": "^5.0.0",
+    "vite-tsconfig-paths": "4.3.2",
     "vitest": "^0.34.6"
   },
   "description": "An Ionic project"
