@@ -1,0 +1,7 @@
+{
+  "name": "GlucoHealth",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react-vite"
+}
