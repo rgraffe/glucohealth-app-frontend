@@ -53,6 +53,12 @@ export const App: React.FC = () => (
               <Route path={ROUTES.DASHBOARD.TAB1} component={Tab1} />
               <Route path={ROUTES.DASHBOARD.TAB2} component={Tab2} />
               <Route path={ROUTES.DASHBOARD.TAB3} component={Tab3} />
+
+              <Redirect
+                exact
+                from={ROUTES.DASHBOARD.ROOT}
+                to={ROUTES.DASHBOARD.TAB1}
+              />
             </IonRouterOutlet>
           </TabsLayout>
         </Route>
