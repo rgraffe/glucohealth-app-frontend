@@ -42,7 +42,7 @@ export function LoginForm() {
       >
         <IonInputPasswordToggle slot="end"></IonInputPasswordToggle>
       </IonInput>
-      <IonButton type="submit" routerLink={ROUTES.DASHBOARD.ROOT}>
+      <IonButton type="submit">
         Iniciar Sesión
       </IonButton>
     </form>
