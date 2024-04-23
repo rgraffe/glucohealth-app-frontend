@@ -7,6 +7,8 @@ import Tab3 from '~/pages/tab3'
 import { TabsLayout } from './layout/tabs-layout'
 import { ROUTES } from '~/shared/constants/routes'
 
+import './theme/tailwind.css'
+
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css'
 
