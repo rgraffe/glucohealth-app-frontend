@@ -10,7 +10,7 @@ import {
   IonFab,
   IonFabButton,
 } from '@ionic/react'
-import { add, search } from 'ionicons/icons'
+import { add } from 'ionicons/icons'
 
 export function PatientsPage() {
   return (
@@ -33,7 +33,12 @@ export function PatientsPage() {
           </header>
           <div className="w-full m-6 h-[1px] bg-black dark:bg-white" />
 
-          <IonFab slot="fixed" horizontal="end" vertical="bottom" className='mb-16 mr-2'>
+          <IonFab
+            slot="fixed"
+            horizontal="end"
+            vertical="bottom"
+            className="mb-16 mr-2"
+          >
             <IonFabButton>
               <IonIcon icon={add}></IonIcon>
             </IonFabButton>
