@@ -18,15 +18,15 @@ export function TabsLayout({ children }: Props) {
       {children}
 
       <IonTabBar slot="bottom">
-        <IonTabButton tab="dashboard" href={ROUTES.APP.DASHBOARD.ROOT}>
+        <IonTabButton tab="dashboard" href={ROUTES.APP.DASHBOARD.PATH}>
           <IonIcon aria-hidden="true" icon={home} />
           <IonLabel>Panel</IonLabel>
         </IonTabButton>
-        <IonTabButton tab="patients" href={ROUTES.APP.PATIENTS.ROOT}>
+        <IonTabButton tab="patients" href={ROUTES.APP.PATIENTS.PATH}>
           <IonIcon aria-hidden="true" icon={person} />
           <IonLabel>Pacientes</IonLabel>
         </IonTabButton>
-        <IonTabButton tab="settings" href={ROUTES.APP.SETTINGS.ROOT}>
+        <IonTabButton tab="settings" href={ROUTES.APP.SETTINGS.PATH}>
           <IonIcon aria-hidden="true" icon={settings} />
           <IonLabel>Configuración</IonLabel>
         </IonTabButton>

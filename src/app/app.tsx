@@ -37,6 +37,7 @@ import './theme/variables.css'
 import { TabsLayout } from './layout/tabs-layout'
 import { DashboardPage, LoginPage, PatientsPage, SettingsPage } from '~/pages'
 import { ROUTES } from '~/shared/constants/routes'
+import { PatientPreregisterPage } from '~/pages/patients/preregister/page'
 
 setupIonicReact()
 
@@ -44,27 +45,33 @@ export const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
       <IonRouterOutlet>
-        <Route exact path={ROUTES.LOGIN} component={LoginPage} />
-        <Route path={ROUTES.APP.ROOT}>
+        <Route exact path={ROUTES.LOGIN.PATH} component={LoginPage} />
+        <Route path={ROUTES.APP.PATH}>
           <TabsLayout>
             <IonRouterOutlet>
               <Route
-                path={ROUTES.APP.DASHBOARD.ROOT}
+                path={ROUTES.APP.DASHBOARD.PATH}
                 component={DashboardPage}
               />
-              <Route path={ROUTES.APP.PATIENTS.ROOT} component={PatientsPage} />
-              <Route path={ROUTES.APP.SETTINGS.ROOT} component={SettingsPage} />
+
+              <Route path={ROUTES.APP.PATIENTS.PATH} component={PatientsPage} />
+              <Route
+                path={ROUTES.APP.PATIENTS.PREREGISTER.PATH}
+                component={PatientPreregisterPage}
+              />
+
+              <Route path={ROUTES.APP.SETTINGS.PATH} component={SettingsPage} />
 
               <Redirect
                 exact
-                from={ROUTES.APP.ROOT}
-                to={ROUTES.APP.DASHBOARD.ROOT}
+                from={ROUTES.APP.PATH}
+                to={ROUTES.APP.DASHBOARD.PATH}
               />
             </IonRouterOutlet>
           </TabsLayout>
         </Route>
 
-        <Redirect exact from={ROUTES.ROOT} to={ROUTES.LOGIN} />
+        <Redirect exact from={ROUTES.ROOT} to={ROUTES.LOGIN.PATH} />
       </IonRouterOutlet>
     </IonReactRouter>
   </IonApp>

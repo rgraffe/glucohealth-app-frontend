@@ -1,13 +1,13 @@
 export const ROUTES = {
   ROOT: '/',
-  LOGIN: '/login',
+  LOGIN: { PATH: '/login' },
   APP: {
-    ROOT: '/app',
-    DASHBOARD: { ROOT: '/app/dashboard' },
+    PATH: '/app',
+    DASHBOARD: { PATH: '/app/dashboard' },
     PATIENTS: {
-      ROOT: '/app/patients',
-      PREREGISTER: '/app/patients/preregister',
+      PATH: '/app/patients',
+      PREREGISTER: { PATH: '/app/patients/preregister' },
     },
-    SETTINGS: { ROOT: '/app/settings' },
+    SETTINGS: { PATH: '/app/settings' },
   },
 }
