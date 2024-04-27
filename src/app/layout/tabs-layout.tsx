@@ -5,7 +5,7 @@ import {
   IonTabButton,
   IonTabs,
 } from '@ionic/react'
-import { triangle, ellipse, square } from 'ionicons/icons'
+import { home, person, settings } from 'ionicons/icons'
 import { ROUTES } from '~/shared/constants/routes'
 
 interface Props {
@@ -18,17 +18,17 @@ export function TabsLayout({ children }: Props) {
       {children}
 
       <IonTabBar slot="bottom">
-        <IonTabButton tab="tab1" href={ROUTES.DASHBOARD.TAB1}>
-          <IonIcon aria-hidden="true" icon={triangle} />
-          <IonLabel>Tab 1</IonLabel>
+        <IonTabButton tab="dashboard" href={ROUTES.APP.DASHBOARD}>
+          <IonIcon aria-hidden="true" icon={home} />
+          <IonLabel>Panel</IonLabel>
         </IonTabButton>
-        <IonTabButton tab="tab2" href={ROUTES.DASHBOARD.TAB2}>
-          <IonIcon aria-hidden="true" icon={ellipse} />
-          <IonLabel>Tab 2</IonLabel>
+        <IonTabButton tab="patients" href={ROUTES.APP.PATIENTS}>
+          <IonIcon aria-hidden="true" icon={person} />
+          <IonLabel>Pacientes</IonLabel>
         </IonTabButton>
-        <IonTabButton tab="tab3" href={ROUTES.DASHBOARD.TAB3}>
-          <IonIcon aria-hidden="true" icon={square} />
-          <IonLabel>Tab 3</IonLabel>
+        <IonTabButton tab="settings" href={ROUTES.APP.SETTINGS}>
+          <IonIcon aria-hidden="true" icon={settings} />
+          <IonLabel>Configuración</IonLabel>
         </IonTabButton>
       </IonTabBar>
     </IonTabs>

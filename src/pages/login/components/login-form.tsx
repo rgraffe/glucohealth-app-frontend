@@ -13,7 +13,7 @@ export function LoginForm() {
       password: '',
     },
     onSubmit: values => {
-      history.push(ROUTES.DASHBOARD.ROOT)
+      history.push(ROUTES.APP.ROOT)
     },
   })
 
