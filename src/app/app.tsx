@@ -1,7 +1,6 @@
 import { Redirect, Route } from 'react-router-dom'
 import { IonApp, IonRouterOutlet, setupIonicReact } from '@ionic/react'
 import { IonReactRouter } from '@ionic/react-router'
-import Tab1 from '~/pages/tab1'
 import Tab2 from '~/pages/tab2'
 import Tab3 from '~/pages/tab3'
 import { TabsLayout } from './layout/tabs-layout'
@@ -38,7 +37,8 @@ import '@ionic/react/css/palettes/dark.system.css'
 
 /* Theme variables */
 import './theme/variables.css'
-import { LoginPage } from '~/pages'
+
+import { DashboardPage, LoginPage } from '~/pages'
 
 setupIonicReact()
 
@@ -50,7 +50,7 @@ export const App: React.FC = () => (
         <Route path={ROUTES.APP.ROOT}>
           <TabsLayout>
             <IonRouterOutlet>
-              <Route path={ROUTES.APP.DASHBOARD} component={Tab1} />
+              <Route path={ROUTES.APP.DASHBOARD} component={DashboardPage} />
               <Route path={ROUTES.APP.PATIENTS} component={Tab2} />
               <Route path={ROUTES.APP.SETTINGS} component={Tab3} />
 
