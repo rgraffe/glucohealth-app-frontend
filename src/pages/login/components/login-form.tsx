@@ -30,6 +30,7 @@ export function LoginForm() {
         name="email"
         fill="outline"
         label="Correo Electrónico"
+        type="email"
         className="max-w-xl"
         mode="md"
       />
