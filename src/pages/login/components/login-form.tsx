@@ -13,7 +13,6 @@ export function LoginForm() {
       password: '',
     },
     onSubmit: values => {
-      alert(JSON.stringify(values, null, 2))
       history.push(ROUTES.DASHBOARD.ROOT)
     },
   })
@@ -25,7 +24,7 @@ export function LoginForm() {
         handleSubmit()
       }}
       onInput={handleChange}
-      className="flex flex-col w-full h-full justify-center items-center gap-5 px-3"
+      className="flex flex-col justify-center items-center gap-5"
     >
       <IonInput
         name="email"
