@@ -32,6 +32,7 @@ export function LoginForm() {
         fill="outline"
         label="Correo Electrónico"
         className="max-w-xl"
+        mode="md"
       />
       <IonInput
         name="password"
@@ -39,12 +40,11 @@ export function LoginForm() {
         label="Contraseña"
         type="password"
         className="max-w-xl"
+        mode="md"
       >
         <IonInputPasswordToggle slot="end"></IonInputPasswordToggle>
       </IonInput>
-      <IonButton type="submit">
-        Iniciar Sesión
-      </IonButton>
+      <IonButton type="submit">Iniciar Sesión</IonButton>
     </form>
   )
 }
