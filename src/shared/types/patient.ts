@@ -7,5 +7,4 @@ export interface Patient {
   age: number
   weightInKg: number
   heightInCm: number
-  password: string
 }

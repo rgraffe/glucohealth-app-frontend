@@ -9,8 +9,23 @@ import {
   IonSearchbar,
   IonFab,
   IonFabButton,
+  IonList,
+  IonItem,
 } from '@ionic/react'
 import { add } from 'ionicons/icons'
+import { PatientListItem } from './components/patients-list/patient-list-item'
+import { PatientsList } from './components/patients-list/patients-list'
+
+const examplePatient = {
+  id: 'string',
+  fullName: 'Anatolia Gómez',
+  email: '',
+  phoneNumber: '',
+  nationalId: '12345678',
+  age: 35,
+  weightInKg: 60,
+  heightInCm: 165,
+}
 
 export function PatientsPage() {
   return (
@@ -31,7 +46,11 @@ export function PatientsPage() {
               <IonSearchbar placeholder="Número único de identificación"></IonSearchbar>
             </div>
           </header>
-          <div className="w-full m-6 h-[1px] bg-black dark:bg-white" />
+          <div className="w-full mt-4 mb-6 h-[1px] bg-black dark:bg-white" />
+
+          <PatientsList
+            patients={[examplePatient, examplePatient, examplePatient]}
+          />
 
           <IonFab
             slot="fixed"
