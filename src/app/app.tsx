@@ -35,9 +35,7 @@ import '@ionic/react/css/palettes/dark.system.css'
 import './theme/variables.css'
 
 import { TabsLayout } from './layout/tabs-layout'
-import { DashboardPage, LoginPage } from '~/pages'
-import Tab2 from '~/pages/tab2'
-import Tab3 from '~/pages/tab3'
+import { DashboardPage, LoginPage, PatientsPage, SettingsPage } from '~/pages'
 import { ROUTES } from '~/shared/constants/routes'
 
 setupIonicReact()
@@ -51,8 +49,8 @@ export const App: React.FC = () => (
           <TabsLayout>
             <IonRouterOutlet>
               <Route path={ROUTES.APP.DASHBOARD} component={DashboardPage} />
-              <Route path={ROUTES.APP.PATIENTS} component={Tab2} />
-              <Route path={ROUTES.APP.SETTINGS} component={Tab3} />
+              <Route path={ROUTES.APP.PATIENTS} component={PatientsPage} />
+              <Route path={ROUTES.APP.SETTINGS} component={SettingsPage} />
 
               <Redirect
                 exact
