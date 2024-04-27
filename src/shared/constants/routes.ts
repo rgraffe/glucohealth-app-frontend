@@ -3,8 +3,11 @@ export const ROUTES = {
   LOGIN: '/login',
   APP: {
     ROOT: '/app',
-    DASHBOARD: '/app/dashboard',
-    PATIENTS: '/app/patients',
-    SETTINGS: '/app/settings',
+    DASHBOARD: { ROOT: '/app/dashboard' },
+    PATIENTS: {
+      ROOT: '/app/patients',
+      PREREGISTER: '/app/patients/preregister',
+    },
+    SETTINGS: { ROOT: '/app/settings' },
   },
 }

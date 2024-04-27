@@ -48,14 +48,14 @@ export const App: React.FC = () => (
         <Route path={ROUTES.APP.ROOT}>
           <TabsLayout>
             <IonRouterOutlet>
-              <Route path={ROUTES.APP.DASHBOARD} component={DashboardPage} />
-              <Route path={ROUTES.APP.PATIENTS} component={PatientsPage} />
-              <Route path={ROUTES.APP.SETTINGS} component={SettingsPage} />
+              <Route path={ROUTES.APP.DASHBOARD.ROOT} component={DashboardPage} />
+              <Route path={ROUTES.APP.PATIENTS.ROOT} component={PatientsPage} />
+              <Route path={ROUTES.APP.SETTINGS.ROOT} component={SettingsPage} />
 
               <Redirect
                 exact
                 from={ROUTES.APP.ROOT}
-                to={ROUTES.APP.DASHBOARD}
+                to={ROUTES.APP.DASHBOARD.ROOT}
               />
             </IonRouterOutlet>
           </TabsLayout>
