@@ -16,11 +16,6 @@ export function SettingsPage() {
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">Configuración</IonTitle>
-          </IonToolbar>
-        </IonHeader>
         <ExploreContainer name="Settings page" />
       </IonContent>
     </IonPage>

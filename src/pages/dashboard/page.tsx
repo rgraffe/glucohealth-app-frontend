@@ -16,11 +16,6 @@ export function DashboardPage() {
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">Panel</IonTitle>
-          </IonToolbar>
-        </IonHeader>
         <ExploreContainer name="Dashboard page" />
       </IonContent>
     </IonPage>

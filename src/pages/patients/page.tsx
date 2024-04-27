@@ -16,11 +16,6 @@ export function PatientsPage() {
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">Pacientes</IonTitle>
-          </IonToolbar>
-        </IonHeader>
         <ExploreContainer name="Patients page" />
       </IonContent>
     </IonPage>
