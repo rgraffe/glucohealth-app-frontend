@@ -48,7 +48,10 @@ export const App: React.FC = () => (
         <Route path={ROUTES.APP.ROOT}>
           <TabsLayout>
             <IonRouterOutlet>
-              <Route path={ROUTES.APP.DASHBOARD.ROOT} component={DashboardPage} />
+              <Route
+                path={ROUTES.APP.DASHBOARD.ROOT}
+                component={DashboardPage}
+              />
               <Route path={ROUTES.APP.PATIENTS.ROOT} component={PatientsPage} />
               <Route path={ROUTES.APP.SETTINGS.ROOT} component={SettingsPage} />
 
