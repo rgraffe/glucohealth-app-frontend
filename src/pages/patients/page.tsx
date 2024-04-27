@@ -9,8 +9,6 @@ import {
   IonSearchbar,
   IonFab,
   IonFabButton,
-  IonList,
-  IonItem,
 } from '@ionic/react'
 import { add } from 'ionicons/icons'
 import { PatientsList } from './components/patients-list/patients-list'
