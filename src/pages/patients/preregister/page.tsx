@@ -5,7 +5,7 @@ import {
   IonTitle,
   IonContent,
 } from '@ionic/react'
-import ExploreContainer from '~/shared/components/ExploreContainer'
+import { PreregisterForm } from './components/preregister-form'
 
 export function PatientPreregisterPage() {
   return (
@@ -16,7 +16,9 @@ export function PatientPreregisterPage() {
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
-        <ExploreContainer name="Patient Preregister page" />
+        <main className="w-full h-full flex justify-center items-center px-5">
+          <PreregisterForm />
+        </main>
       </IonContent>
     </IonPage>
   )
