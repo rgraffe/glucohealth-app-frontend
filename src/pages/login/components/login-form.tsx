@@ -2,7 +2,7 @@ import { IonInput, IonInputPasswordToggle, IonButton } from '@ionic/react'
 import { useFormik } from 'formik'
 import { useHistory } from 'react-router'
 import { ROUTES } from '~/shared/constants/routes'
-import { LoginDto } from '~/shared/types/dtos/login'
+import { LoginDto } from '~/features/auth'
 
 export function LoginForm() {
   const history = useHistory()
