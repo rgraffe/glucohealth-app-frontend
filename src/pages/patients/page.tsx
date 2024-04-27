@@ -13,7 +13,6 @@ import {
   IonItem,
 } from '@ionic/react'
 import { add } from 'ionicons/icons'
-import { PatientListItem } from './components/patients-list/patient-list-item'
 import { PatientsList } from './components/patients-list/patients-list'
 
 const examplePatient = {
