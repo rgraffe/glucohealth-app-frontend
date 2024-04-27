@@ -50,17 +50,27 @@ export const App: React.FC = () => (
           <TabsLayout>
             <IonRouterOutlet>
               <Route
+                exact
                 path={ROUTES.APP.DASHBOARD.PATH}
                 component={DashboardPage}
               />
 
-              <Route path={ROUTES.APP.PATIENTS.PATH} component={PatientsPage} />
               <Route
+                exact
+                path={ROUTES.APP.PATIENTS.PATH}
+                component={PatientsPage}
+              />
+              <Route
+                exact
                 path={ROUTES.APP.PATIENTS.PREREGISTER.PATH}
                 component={PatientPreregisterPage}
               />
 
-              <Route path={ROUTES.APP.SETTINGS.PATH} component={SettingsPage} />
+              <Route
+                exact
+                path={ROUTES.APP.SETTINGS.PATH}
+                component={SettingsPage}
+              />
 
               <Redirect
                 exact

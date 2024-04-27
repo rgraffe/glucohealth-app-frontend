@@ -12,6 +12,7 @@ import {
 } from '@ionic/react'
 import { add } from 'ionicons/icons'
 import { PatientsList } from './components/patients-list/patients-list'
+import { ROUTES } from '~/shared/constants/routes'
 
 const examplePatient = {
   id: 'string',
@@ -55,7 +56,7 @@ export function PatientsPage() {
             vertical="bottom"
             className="mb-16 mr-2"
           >
-            <IonFabButton>
+            <IonFabButton routerLink={ROUTES.APP.PATIENTS.PREREGISTER.PATH}>
               <IonIcon icon={add}></IonIcon>
             </IonFabButton>
           </IonFab>
