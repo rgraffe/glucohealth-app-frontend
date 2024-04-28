@@ -2,9 +2,13 @@ import { AES, enc } from 'crypto-js'
 import { AES_KEY } from '~/shared/config'
 
 export function encrypt(message: string) {
-  return AES.encrypt(message, AES_KEY)
+  let encJson = AES.encrypt(JSON.stringify(message), AES_KEY).toString()
+  let encData = enc.Base64.stringify(enc.Utf8.parse(encJson))
+  return encData
 }
 
 export function decrypt(cipherText: string) {
-  return AES.decrypt(cipherText, AES_KEY).toString(enc.Utf8)
+  let decData = enc.Base64.parse(cipherText).toString(enc.Utf8)
+  let bytes = AES.decrypt(decData, AES_KEY).toString(enc.Utf8)
+  return JSON.parse(bytes)
 }
