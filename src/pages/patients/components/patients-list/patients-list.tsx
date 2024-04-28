@@ -19,7 +19,7 @@ export function PatientsList() {
   }
 
   return (
-    <IonList className="overflow-y-scroll max-w-xl flex flex-col gap-5 w-full">
+    <IonList className="overflow-y-scroll max-w-xl gap-5 w-full">
       {data.items.length ? (
         data.items.map(p => <PatientListItem key={p.id} patient={p} />)
       ) : (

@@ -8,7 +8,7 @@ interface Props {
 
 export function PatientListItem({ patient }: Props) {
   return (
-    <IonItem className="w-full justify-center max-w-xl">
+    <IonItem className="w-full justify-center max-w-xl pb-5 px-5">
       <IonAvatar className="mr-4 w-20 h-20">
         <img alt="" src={avatar_svg} />
       </IonAvatar>
@@ -17,7 +17,7 @@ export function PatientListItem({ patient }: Props) {
           <h2>{patient.fullName}</h2>
           <h3>NUI - {patient.nationalId}</h3>
         </IonLabel>
-        <IonButton className="mb-2 mt-4">Ver Información</IonButton>
+        <IonButton className="mb-10">Ver Información</IonButton>
       </div>
     </IonItem>
   )
