@@ -6,13 +6,11 @@ import { PreregisterDto } from '../dto/preregister'
 import { HttpStatusCode } from 'axios'
 
 export async function preregisterPatient(preregisterDto: PreregisterDto) {
-  const res = await axiosClient.post<BackendResponse<Patient>>(
-    PATIENTS_BACKEND_URL,
-    preregisterDto,
-    {
-      validateStatus: status => status === HttpStatusCode.Created,
-    },
-  )
+  const res = await axiosClient.post<
+    BackendResponse<Patient & { password: string }>
+  >(PATIENTS_BACKEND_URL, preregisterDto, {
+    validateStatus: status => status === HttpStatusCode.Created,
+  })
 
   return res.data.data
 }

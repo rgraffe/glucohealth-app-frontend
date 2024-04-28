@@ -6,7 +6,10 @@ export const ROUTES = {
     DASHBOARD: { PATH: '/app/dashboard' },
     PATIENTS: {
       PATH: '/app/patients',
-      PREREGISTER: { PATH: '/app/patients/preregister' },
+      PREREGISTER: {
+        PATH: '/app/patients/preregister',
+        LOGIN_DATA: { PATH: '/app/patients/preregister/login-data' },
+      },
     },
     SETTINGS: { PATH: '/app/settings' },
   },

@@ -41,6 +41,7 @@ import {
   PatientsPage,
   PatientPreregisterPage,
   SettingsPage,
+  PatientPreregisterLoginDataPage,
 } from '~/pages'
 import { ROUTES } from '~/shared/constants/routes'
 import Providers from './providers'
@@ -71,6 +72,12 @@ export const App: React.FC = () => (
                   exact
                   path={ROUTES.APP.PATIENTS.PREREGISTER.PATH}
                   component={PatientPreregisterPage}
+                />
+
+                <Route
+                  exact
+                  path={ROUTES.APP.PATIENTS.PREREGISTER.LOGIN_DATA.PATH}
+                  component={PatientPreregisterLoginDataPage}
                 />
 
                 <Route

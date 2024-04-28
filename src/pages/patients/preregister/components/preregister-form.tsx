@@ -7,6 +7,7 @@ import { QUERY_KEYS } from '~/features/patients/constants'
 import { patientPreregisterSchema } from '~/features/patients/schemas/preregister-schema'
 import { preregisterPatient } from '~/features/patients/services/preregister'
 import { ROUTES } from '~/shared/constants/routes'
+import { encrypt } from '~/shared/utils/aes-encryption'
 
 export function PreregisterForm() {
   const history = useHistory()
@@ -17,8 +18,15 @@ export function PreregisterForm() {
     mutationFn: (values: PreregisterDto) => {
       return preregisterPatient(values)
     },
-    onSuccess: () => {
+    onSuccess: data => {
       queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.PATIENTS_LIST] })
+
+      const encryptedEmail = encrypt(data.email)
+      const encryptedPassword = encrypt(data.password)
+
+      history.push(
+        `${ROUTES.APP.PATIENTS.PREREGISTER.LOGIN_DATA.PATH}?e=${encryptedEmail}&p=${encryptedPassword}`,
+      )
     },
   })
 
@@ -30,7 +38,6 @@ export function PreregisterForm() {
       },
       onSubmit: values => {
         preregisterMutation.mutate(values)
-        history.push(ROUTES.APP.PATIENTS.PATH)
       },
       validationSchema: patientPreregisterSchema,
     })
@@ -66,6 +73,7 @@ export function PreregisterForm() {
         className={`max-w-xl ${errors.nationalId ? 'ion-invalid' : ''} ${touched.nationalId && 'ion-touched'}`}
         mode="md"
       ></IonInput>
+
       <IonButton disabled={!isValid} type="submit">
         Continuar
       </IonButton>
