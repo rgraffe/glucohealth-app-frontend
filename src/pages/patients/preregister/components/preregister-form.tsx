@@ -1,21 +1,41 @@
 import { IonInput, IonButton } from '@ionic/react'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useFormik } from 'formik'
 import { useHistory } from 'react-router'
 import { PreregisterDto } from '~/features/patients'
+import { QUERY_KEYS } from '~/features/patients/constants'
+import { patientPreregisterSchema } from '~/features/patients/schemas/preregister-schema'
+import { preregisterPatient } from '~/features/patients/services/preregister'
 import { ROUTES } from '~/shared/constants/routes'
 
 export function PreregisterForm() {
   const history = useHistory()
 
-  const { handleChange, handleSubmit } = useFormik<PreregisterDto>({
-    initialValues: {
-      email: '',
-      nationalId: '',
+  const queryClient = useQueryClient()
+
+  const preregisterMutation = useMutation({
+    mutationFn: (values: PreregisterDto) => {
+      return preregisterPatient(values)
     },
-    onSubmit: values => {
-      history.push(ROUTES.APP.PATIENTS.PATH)
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.PATIENTS_LIST] })
     },
   })
+
+  const { handleChange, handleSubmit, handleBlur, isValid, touched, errors } =
+    useFormik<PreregisterDto>({
+      initialValues: {
+        email: '',
+        nationalId: '',
+      },
+      onSubmit: values => {
+        preregisterMutation.mutate(values)
+        history.push(ROUTES.APP.PATIENTS.PATH)
+      },
+      validationSchema: patientPreregisterSchema,
+    })
+
+  if (preregisterMutation.isPending) return <h1>Loading...</h1>
 
   return (
     <form
@@ -24,6 +44,7 @@ export function PreregisterForm() {
         handleSubmit()
       }}
       onInput={handleChange}
+      onBlur={handleBlur}
       className="flex flex-col w-full justify-center items-center gap-5"
     >
       <IonInput
@@ -31,19 +52,23 @@ export function PreregisterForm() {
         fill="outline"
         labelPlacement="stacked"
         type="email"
+        errorText={errors.email}
+        className={`max-w-xl ${errors.email ? 'ion-invalid' : ''} ${touched.email && 'ion-touched'}`}
         label="Correo Electrónico"
-        className="max-w-xl"
         mode="md"
       />
       <IonInput
-        name="password"
+        name="nationalId"
         fill="outline"
         labelPlacement="stacked"
         label="Número único de identificación"
-        className="max-w-xl"
+        errorText={errors.nationalId}
+        className={`max-w-xl ${errors.nationalId ? 'ion-invalid' : ''} ${touched.nationalId && 'ion-touched'}`}
         mode="md"
       ></IonInput>
-      <IonButton type="submit">Continuar</IonButton>
+      <IonButton disabled={!isValid} type="submit">
+        Continuar
+      </IonButton>
     </form>
   )
 }

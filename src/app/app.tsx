@@ -43,51 +43,54 @@ import {
   SettingsPage,
 } from '~/pages'
 import { ROUTES } from '~/shared/constants/routes'
+import Providers from './providers'
 
 setupIonicReact()
 
 export const App: React.FC = () => (
-  <IonApp>
-    <IonReactRouter>
-      <IonRouterOutlet>
-        <Route exact path={ROUTES.LOGIN.PATH} component={LoginPage} />
-        <Route path={ROUTES.APP.PATH}>
-          <TabsLayout>
-            <IonRouterOutlet>
-              <Route
-                exact
-                path={ROUTES.APP.DASHBOARD.PATH}
-                component={DashboardPage}
-              />
+  <Providers>
+    <IonApp>
+      <IonReactRouter>
+        <IonRouterOutlet>
+          <Route exact path={ROUTES.LOGIN.PATH} component={LoginPage} />
+          <Route path={ROUTES.APP.PATH}>
+            <TabsLayout>
+              <IonRouterOutlet>
+                <Route
+                  exact
+                  path={ROUTES.APP.DASHBOARD.PATH}
+                  component={DashboardPage}
+                />
 
-              <Route
-                exact
-                path={ROUTES.APP.PATIENTS.PATH}
-                component={PatientsPage}
-              />
-              <Route
-                exact
-                path={ROUTES.APP.PATIENTS.PREREGISTER.PATH}
-                component={PatientPreregisterPage}
-              />
+                <Route
+                  exact
+                  path={ROUTES.APP.PATIENTS.PATH}
+                  component={PatientsPage}
+                />
+                <Route
+                  exact
+                  path={ROUTES.APP.PATIENTS.PREREGISTER.PATH}
+                  component={PatientPreregisterPage}
+                />
 
-              <Route
-                exact
-                path={ROUTES.APP.SETTINGS.PATH}
-                component={SettingsPage}
-              />
+                <Route
+                  exact
+                  path={ROUTES.APP.SETTINGS.PATH}
+                  component={SettingsPage}
+                />
 
-              <Redirect
-                exact
-                from={ROUTES.APP.PATH}
-                to={ROUTES.APP.DASHBOARD.PATH}
-              />
-            </IonRouterOutlet>
-          </TabsLayout>
-        </Route>
+                <Redirect
+                  exact
+                  from={ROUTES.APP.PATH}
+                  to={ROUTES.APP.DASHBOARD.PATH}
+                />
+              </IonRouterOutlet>
+            </TabsLayout>
+          </Route>
 
-        <Redirect exact from={ROUTES.ROOT} to={ROUTES.LOGIN.PATH} />
-      </IonRouterOutlet>
-    </IonReactRouter>
-  </IonApp>
+          <Redirect exact from={ROUTES.ROOT} to={ROUTES.LOGIN.PATH} />
+        </IonRouterOutlet>
+      </IonReactRouter>
+    </IonApp>
+  </Providers>
 )

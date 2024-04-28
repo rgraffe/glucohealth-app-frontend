@@ -11,19 +11,8 @@ import {
   IonFabButton,
 } from '@ionic/react'
 import { add } from 'ionicons/icons'
-import { PatientsList } from './components/patients-list/patients-list'
 import { ROUTES } from '~/shared/constants/routes'
-
-const examplePatient = {
-  id: 'string',
-  fullName: 'Anatolia Gómez',
-  email: '',
-  phoneNumber: '',
-  nationalId: '12345678',
-  age: 35,
-  weightInKg: 60,
-  heightInCm: 165,
-}
+import { PatientsList } from './components/patients-list/patients-list'
 
 export function PatientsPage() {
   return (
@@ -46,9 +35,7 @@ export function PatientsPage() {
           </header>
           <div className="w-full mt-4 mb-6 h-[1px] bg-black dark:bg-white" />
 
-          <PatientsList
-            patients={[examplePatient, examplePatient, examplePatient]}
-          />
+          <PatientsList />
 
           <IonFab
             slot="fixed"
