@@ -35,9 +35,14 @@ import '@ionic/react/css/palettes/dark.system.css'
 import './theme/variables.css'
 
 import { TabsLayout } from './layout/tabs-layout'
-import { DashboardPage, LoginPage, PatientsPage, SettingsPage } from '~/pages'
+import {
+  DashboardPage,
+  LoginPage,
+  PatientsPage,
+  PatientPreregisterPage,
+  SettingsPage,
+} from '~/pages'
 import { ROUTES } from '~/shared/constants/routes'
-import { PatientPreregisterPage } from '~/pages/patients/preregister/page'
 
 setupIonicReact()
 

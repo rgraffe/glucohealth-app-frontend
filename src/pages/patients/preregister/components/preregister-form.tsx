@@ -1,4 +1,4 @@
-import { IonInput, IonInputPasswordToggle, IonButton } from '@ionic/react'
+import { IonInput, IonButton } from '@ionic/react'
 import { useFormik } from 'formik'
 import { useHistory } from 'react-router'
 import { PreregisterDto } from '~/features/patients'
