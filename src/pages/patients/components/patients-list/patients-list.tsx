@@ -15,7 +15,7 @@ export function PatientsList() {
   }
 
   if (isError) {
-    return <h1>Error dad...</h1>
+    return <h1>Error listando los clientes.</h1>
   }
 
   return (
