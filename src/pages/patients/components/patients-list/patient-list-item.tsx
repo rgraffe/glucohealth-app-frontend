@@ -1,6 +1,7 @@
 import { IonAvatar, IonButton, IonIcon, IonItem, IonLabel } from '@ionic/react'
 import { Patient } from '~/shared/types'
 import avatar_svg from '~/shared/assets/avatar.svg'
+import { ROUTES } from '~/shared/constants/routes'
 
 interface Props {
   patient: Patient
@@ -17,7 +18,12 @@ export function PatientListItem({ patient }: Props) {
           <h2>{patient.fullName}</h2>
           <h3>NUI - {patient.nationalId}</h3>
         </IonLabel>
-        <IonButton className="mb-10">Ver Información</IonButton>
+        <IonButton
+          href={`${ROUTES.APP.PATIENT.PATH}?id=${patient.id}`}
+          className="mb-10"
+        >
+          Ver Información
+        </IonButton>
       </div>
     </IonItem>
   )
