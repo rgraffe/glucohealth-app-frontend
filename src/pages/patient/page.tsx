@@ -13,6 +13,7 @@ import { useQuery } from '@tanstack/react-query'
 import { useLocation } from 'react-router'
 import { QUERY_KEYS } from '~/features/patients/constants'
 import { getPatientById } from '~/features/patients/services/get-by-id'
+import { TreatmentList } from './treatment-list/treatment-list'
 
 export function PatientPage() {
   const [present, dismiss] = useIonLoading()
@@ -56,7 +57,7 @@ export function PatientPage() {
           </IonToolbar>
         </IonHeader>
         <IonContent fullscreen>
-          <main className="flex flex-col w-full h-full pt-7 px-4 items-center">
+          <main className="flex flex-col w-full h-full pt-7 px-4 items-center max-w-3xl m-auto">
             <IonText className="text-center flex flex-col gap-2 text-balance">
               {data.fullName ? (
                 <h1 className="font-semibold my-0 text-3xl">{data.fullName}</h1>
@@ -111,10 +112,11 @@ export function PatientPage() {
             </section>
 
             <section className="w-full mt-6">
-              <IonText className="text-lg text-left font-medium">
-                <h2>Tratamiento</h2>
+              <IonText className="text-left">
+                <h2 className="text-3xl font-bold">Tratamiento</h2>
               </IonText>
-              <p className="opacity-50">Este paciente no tiene tratamiento.</p>
+              {/*  <p className="opacity-50">Este paciente no tiene tratamiento.</p> */}
+              <TreatmentList />
             </section>
           </main>
         </IonContent>
