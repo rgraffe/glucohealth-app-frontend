@@ -30,11 +30,20 @@ export function PatientPage() {
 
   const { data, isPending, isFetching, isError } = useQuery({
     queryKey: [QUERY_KEYS.PATIENT_DATA],
-    queryFn: () => getPatientById(id),
+    queryFn: async () => {
+      present()
+      try {
+        const patient = await getPatientById(id)
+        return patient
+      } catch (e) {
+        throw e
+      } finally {
+        dismiss()
+      }
+    },
   })
 
-  if (isPending || isFetching)
-    return <IonLoading isOpen={isPending || isFetching} />
+  if (isPending || isFetching) return null
 
   if (isError) return <h1>Error...</h1>
 
@@ -49,32 +58,54 @@ export function PatientPage() {
         <IonContent fullscreen>
           <main className="flex flex-col w-full h-full pt-7 px-4 items-center">
             <IonText className="text-center flex flex-col gap-2 text-balance">
-              <h1 className="font-semibold my-0 text-3xl">{data.fullName}</h1>
+              {data.fullName ? (
+                <h1 className="font-semibold my-0 text-3xl">{data.fullName}</h1>
+              ) : (
+                <h1 className="font-semibold my-0 text-3xl opacity-50">
+                  Nombre sin registrar.
+                </h1>
+              )}
               <h2 className="text-xl my-0">NUI - {data.nationalId}</h2>
             </IonText>
 
-            <IonChip className="w-[fit-content] mt-5 text-lg">
-              {data.age} 58 años
-            </IonChip>
+            {data.age ? (
+              <IonChip className="w-[fit-content] mt-5 text-lg">
+                {data.age} 58 años
+              </IonChip>
+            ) : (
+              <IonChip className="w-[fit-content] mt-5 text-lg text-opacity-50">
+                Edad sin registrar.
+              </IonChip>
+            )}
 
             <section className="flex w-full justify-evenly">
               <div>
-                <IonText>
+                <IonText className="text-center">
                   <h3>Peso</h3>
-                  <p>{data.weightInKg} 67 kg</p>
+                  {data.weightInKg ? (
+                    <p>{data.weightInKg}</p>
+                  ) : (
+                    <p className="opacity-50">Sin registrar.</p>
+                  )}
+                  <p>{data.weightInKg} </p>
                 </IonText>
               </div>
               <div>
-                <IonText>
+                <IonText className="text-center">
                   <h3>Altura</h3>
-                  <p>{data.heightInCm} 165 cm</p>
+                  {data.heightInCm ? (
+                    <p>{data.heightInCm}</p>
+                  ) : (
+                    <p className="opacity-50">Sin registrar.</p>
+                  )}
+                  <p>{data.heightInCm} </p>
                 </IonText>
               </div>
               <div>
                 <IonText>
                   <h3>IMC</h3>
                   {/* TODO: PUT IMC */}
-                  <p>24.6</p>
+                  <p className="opacity-50">Sin registrar.</p>
                 </IonText>
               </div>
             </section>
@@ -83,6 +114,7 @@ export function PatientPage() {
               <IonText className="text-lg text-left font-medium">
                 <h2>Tratamiento</h2>
               </IonText>
+              <p className="opacity-50">Este paciente no tiene tratamiento.</p>
             </section>
           </main>
         </IonContent>

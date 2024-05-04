@@ -18,7 +18,7 @@ export function PreregisterForm() {
     mutationFn: (values: PreregisterDto) => {
       return preregisterPatient(values)
     },
-    onSuccess: data => {
+    onSuccess: async data => {
       queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.PATIENTS_LIST] })
 
       const encryptedEmail = encrypt(data.email)
