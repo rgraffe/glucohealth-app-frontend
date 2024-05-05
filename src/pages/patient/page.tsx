@@ -18,7 +18,6 @@ import { getPatientById } from '~/features/patients/services/get-by-id'
 import { TreatmentList } from './components/treatment-list/treatment-list'
 import { add } from 'ionicons/icons'
 import { ROUTES } from '~/shared/constants/routes'
-import { useEffect } from 'react'
 
 export function PatientPage() {
   const [present, dismiss] = useIonLoading()
