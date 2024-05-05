@@ -6,14 +6,18 @@ import {
   IonContent,
   IonText,
   IonChip,
-  IonLoading,
   useIonLoading,
+  IonFab,
+  IonFabButton,
+  IonIcon,
 } from '@ionic/react'
 import { useQuery } from '@tanstack/react-query'
 import { useLocation } from 'react-router'
 import { QUERY_KEYS } from '~/features/patients/constants'
 import { getPatientById } from '~/features/patients/services/get-by-id'
-import { TreatmentList } from './treatment-list/treatment-list'
+import { TreatmentList } from './components/treatment-list/treatment-list'
+import { add } from 'ionicons/icons'
+import { ROUTES } from '~/shared/constants/routes'
 
 export function PatientPage() {
   const [present, dismiss] = useIonLoading()
@@ -119,6 +123,12 @@ export function PatientPage() {
               <TreatmentList />
             </section>
           </main>
+
+          <IonFab className="fixed bottom-5 right-6">
+            <IonFabButton>
+              <IonIcon icon={add}></IonIcon>
+            </IonFabButton>
+          </IonFab>
         </IonContent>
       </IonPage>
     </>
