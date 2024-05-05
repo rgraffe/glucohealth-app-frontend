@@ -19,7 +19,7 @@ export function PatientListItem({ patient }: Props) {
           <h3>NUI - {patient.nationalId}</h3>
         </IonLabel>
         <IonButton
-          href={`${ROUTES.APP.PATIENT.PATH}?id=${patient.id}`}
+          routerLink={`${ROUTES.APP.PATIENT.PATH}?id=${patient.id}`}
           className="mb-10"
         >
           Ver Información

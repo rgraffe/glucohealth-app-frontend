@@ -11,7 +11,10 @@ export const ROUTES = {
         LOGIN_DATA: { PATH: '/app/patients/preregister/login-data' },
       },
     },
-    PATIENT: { PATH: '/app/patient' },
+    PATIENT: {
+      PATH: '/app/patient',
+      CREATE_MEDICATION: { PATH: '/app/patient/create-medication' },
+    },
     SETTINGS: { PATH: '/app/settings' },
   },
 }

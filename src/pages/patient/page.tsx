@@ -18,6 +18,7 @@ import { getPatientById } from '~/features/patients/services/get-by-id'
 import { TreatmentList } from './components/treatment-list/treatment-list'
 import { add } from 'ionicons/icons'
 import { ROUTES } from '~/shared/constants/routes'
+import { useEffect } from 'react'
 
 export function PatientPage() {
   const [present, dismiss] = useIonLoading()
@@ -28,17 +29,13 @@ export function PatientPage() {
 
   const id = searchParams.get('id')
 
-  if (!id) {
-    //TODO: REDIRECT
-    return <h1>Error...</h1>
-  }
-
   const { data, isPending, isFetching, isError } = useQuery({
+    enabled: !!id,
     queryKey: [QUERY_KEYS.PATIENT_DATA],
     queryFn: async () => {
       present()
       try {
-        const patient = await getPatientById(id)
+        const patient = await getPatientById(id!)
         return patient
       } catch (e) {
         throw e
@@ -47,6 +44,11 @@ export function PatientPage() {
       }
     },
   })
+
+  if (!id) {
+    //TODO: REDIRECT
+    return <h1>Error...</h1>
+  }
 
   if (isPending || isFetching) return null
 
@@ -125,7 +127,9 @@ export function PatientPage() {
           </main>
 
           <IonFab className="fixed bottom-5 right-6">
-            <IonFabButton>
+            <IonFabButton
+              routerLink={ROUTES.APP.PATIENT.CREATE_MEDICATION.PATH}
+            >
               <IonIcon icon={add}></IonIcon>
             </IonFabButton>
           </IonFab>
