@@ -37,12 +37,7 @@ export function PatientsPage() {
 
           <PatientsList />
 
-          <IonFab
-            slot="fixed"
-            horizontal="end"
-            vertical="bottom"
-            className="mb-16 mr-2"
-          >
+          <IonFab className="fixed bottom-5 right-6">
             <IonFabButton routerLink={ROUTES.APP.PATIENTS.PREREGISTER.PATH}>
               <IonIcon icon={add}></IonIcon>
             </IonFabButton>
