@@ -2,26 +2,32 @@ import { IonButton, IonSelect, IonSelectOption } from '@ionic/react'
 import { useState } from 'react'
 import { ReminderTypeSelector } from './reminder-type-selector'
 import { FixedReminderFormSection } from './fixed-reminder-form-section'
+import { IntervalReminderFormSection } from './interval-reminder-form-section'
 
 export function CreateMedicationForm() {
   const [reminderType, setReminderType] = useState<'fixed' | 'interval'>(
     'fixed',
   )
-  const [hours, setHours] = useState<string[]>([])
+  const [fixedHours, setFixedHours] = useState<string[]>([])
   const [fixedFinalizationType, setFixedFinalizationType] = useState<
     'by-duration' | 'by-shots-quantity' | null
+  >(null)
+
+  const [intervalInitialHour, setIntervalInitalHour] = useState('')
+  const [intervalFinalizationType, setIntervalFinalizationType] = useState<
+    'by-final-date' | 'by-shots-quantity' | null
   >(null)
 
   function addHour(hour: string) {
     hour = hour.split('T')[1].slice(0, 5)
 
-    if (hours.includes(hour)) return
+    if (fixedHours.includes(hour)) return
 
-    setHours([...hours, hour])
+    setFixedHours([...fixedHours, hour])
   }
 
   function removeHour(hour: string) {
-    setHours(hours.filter(h => h !== hour))
+    setFixedHours(fixedHours.filter(h => h !== hour))
   }
 
   return (
@@ -61,7 +67,7 @@ export function CreateMedicationForm() {
       {reminderType === 'fixed' && (
         <>
           <FixedReminderFormSection
-            hours={hours}
+            hours={fixedHours}
             addHour={addHour}
             removeHour={removeHour}
             finalizationType={fixedFinalizationType}
@@ -70,7 +76,14 @@ export function CreateMedicationForm() {
         </>
       )}
 
-      {reminderType === 'interval' && <h1>Interval</h1>}
+      {reminderType === 'interval' && (
+        <IntervalReminderFormSection
+          initialHour={intervalInitialHour}
+          setInitialHour={setIntervalInitalHour}
+          finalizationType={intervalFinalizationType}
+          setFinalizationType={setIntervalFinalizationType}
+        />
+      )}
 
       <footer className="w-full flex justify-end">
         <IonButton className="w-[40%]">Guardar</IonButton>
