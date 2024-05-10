@@ -1,6 +1,17 @@
 import axios from 'axios'
 import { BACKEND_BASE_URL } from '~/shared/config'
 
+export const axiosClient = axios.create({
+  baseURL: BACKEND_BASE_URL,
+  responseType: 'json',
+  paramsSerializer: params => {
+    const kebabCaseParams = convertKeysToKebabCase(params)
+    return Object.entries(kebabCaseParams)
+      .map(([key, value]) => `${key}=${value}`)
+      .join('&')
+  },
+})
+
 const convertKeysToKebabCase = (
   obj: Record<string, any>,
 ): Record<string, any> => {
@@ -15,14 +26,3 @@ const convertKeysToKebabCase = (
   }
   return kebabCaseObj
 }
-
-export const axiosClient = axios.create({
-  baseURL: BACKEND_BASE_URL,
-  responseType: 'json',
-  paramsSerializer: params => {
-    const kebabCaseParams = convertKeysToKebabCase(params)
-    return Object.entries(kebabCaseParams)
-      .map(([key, value]) => `${key}=${value}`)
-      .join('&')
-  },
-})
