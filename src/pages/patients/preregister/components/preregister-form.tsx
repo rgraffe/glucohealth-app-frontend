@@ -42,7 +42,7 @@ export function PreregisterForm() {
       validationSchema: patientPreregisterSchema,
     })
 
-  if (preregisterMutation.isPending) return <h1>Loading...</h1>
+  if (preregisterMutation.isPending) return <h1>Cargando...</h1>
 
   return (
     <form
