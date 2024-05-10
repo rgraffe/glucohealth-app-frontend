@@ -44,7 +44,9 @@ export function LoginForm() {
       >
         <IonInputPasswordToggle slot="end"></IonInputPasswordToggle>
       </IonInput>
-      <IonButton type="submit">Iniciar Sesión</IonButton>
+      <IonButton type="submit" color="primary">
+        Iniciar Sesión
+      </IonButton>
     </form>
   )
 }
