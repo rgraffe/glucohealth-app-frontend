@@ -15,7 +15,5 @@ export async function getPatientById(id: string) {
     },
   )
 
-  console.log(res)
-
   return res.data.data
 }
