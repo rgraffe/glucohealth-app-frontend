@@ -1,5 +1,5 @@
 import { IonAvatar, IonButton, IonIcon, IonItem, IonLabel } from '@ionic/react'
-import { Patient } from '~/shared/types'
+import { Patient } from '~/shared/types/patient'
 import avatar_svg from '~/shared/assets/avatar.svg'
 import { ROUTES } from '~/shared/constants/routes'
 

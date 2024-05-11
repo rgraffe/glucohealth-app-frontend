@@ -1,7 +1,7 @@
 import { axiosClient } from '~/shared/api'
 import { PATIENTS_BACKEND_URL } from '../constants'
 import { BackendResponse } from '~/shared/types/dto/backend-response'
-import { Patient } from '~/shared/types'
+import { Patient } from '~/shared/types/patient'
 import { PreregisterDto } from '../dto/preregister'
 import { HttpStatusCode } from 'axios'
 
