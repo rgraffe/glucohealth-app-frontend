@@ -58,6 +58,7 @@ setupIonicReact()
 export const App: React.FC = () => {
   try {
     loginFromLocalStorage()
+    if (location.pathname === ROUTES.LOGIN.PATH) location.href = ROUTES.APP.PATH
   } catch (e) {
     if (location.pathname !== ROUTES.LOGIN.PATH)
       location.href = ROUTES.LOGIN.PATH
