@@ -154,15 +154,26 @@ const createCronExpression = (values: FormValues) => {
 
 const createFixedCronExpression = (values: FormValues) => {
   const hours = values.fixedHours.map(hour => hour.split(':')[0])
-  const days = values.initialDay ? [values.initialDay] : WEEK_DAYS
 
   return `0 0 ${hours.join(',')} * * *`
 }
 
 const createIntervalCronExpression = (values: FormValues) => {
   const [initialHour, initialMinute] = values.intervalInitialHour.split(':')
-  const finalDate = values.intervalFinalDate
-  const shotsQuantity = values.intervalShotsQuantity
 
-  return `* ${initialMinute} ${initialHour} * * *`
+  if (values.intervalFinalizationType === 'by-final-date') {
+    const finalDate = values.intervalFinalDate
+    const [finalHour, finalMinute] = finalDate
+      .toISOString()
+      .split('T')[1]
+      .slice(0, 5)
+
+    return `* ${initialMinute} ${initialHour} * * *`
+  }
+
+  if (values.intervalFinalizationType === 'by-shots-quantity') {
+    const shots = values.intervalShotsQuantity
+
+    return `* * ${initialHour} * * *`
+  }
 }
