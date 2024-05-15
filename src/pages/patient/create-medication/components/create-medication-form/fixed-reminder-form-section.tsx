@@ -18,6 +18,12 @@ interface Props {
   removeHour: (hour: string) => void
   finalizationType: 'by-duration' | 'by-shots-quantity' | null
   setFinalizationType: (type: 'by-duration' | 'by-shots-quantity') => void
+  durationQuantity: number
+  setDurationQuantity: (quantity: number) => void
+  durationUnit: 'hours' | 'days' | 'weeks'
+  setDurationUnit: (unit: 'hours' | 'days' | 'weeks') => void
+  shotsQuantity: number
+  setShotsQuantity: (quantity: number) => void
 }
 
 export function FixedReminderFormSection({
@@ -26,6 +32,12 @@ export function FixedReminderFormSection({
   removeHour,
   finalizationType,
   setFinalizationType,
+  durationQuantity,
+  setDurationQuantity,
+  durationUnit,
+  setDurationUnit,
+  shotsQuantity,
+  setShotsQuantity,
 }: Props) {
   return (
     <>
@@ -83,21 +95,54 @@ export function FixedReminderFormSection({
           </IonSelectOption>
         </IonSelect>
       </label>
-      {finalizationType === 'by-duration' && <ByDurationInput />}
-      {finalizationType === 'by-shots-quantity' && <ByShotsQuantityInput />}
+      {finalizationType === 'by-duration' && (
+        <ByDurationInput
+          durationQuantity={durationQuantity}
+          durationUnit={durationUnit}
+          setDurationQuantity={setDurationQuantity}
+          setDurationUnit={setDurationUnit}
+        />
+      )}
+      {finalizationType === 'by-shots-quantity' && (
+        <ByShotsQuantityInput
+          shotsQuantity={shotsQuantity}
+          setShotsQuantity={setShotsQuantity}
+        />
+      )}
     </>
   )
 }
 
-function ByDurationInput() {
+function ByDurationInput({
+  durationQuantity,
+  setDurationQuantity,
+  durationUnit,
+  setDurationUnit,
+}: ByDurationInputProps) {
   return (
     <label className="flex justify-center gap-2">
-      <IonInput className="w-[20%]" type="number" value={1}></IonInput>
-      <IonSelect className="w-[20%]" value="hours">
+      <IonInput
+        className="w-[20%]"
+        type="number"
+        value={durationQuantity}
+        onIonChange={e => setDurationQuantity(Number(e.detail.value))}
+      ></IonInput>
+      <IonSelect
+        className="w-[20%]"
+        value={durationUnit}
+        onIonChange={e => setDurationUnit(e.detail.value)}
+      >
         <IonSelectOption value="hours">Horas</IonSelectOption>
         <IonSelectOption value="days">Días</IonSelectOption>
         <IonSelectOption value="weeks">Semanas</IonSelectOption>
       </IonSelect>
     </label>
   )
+}
+
+interface ByDurationInputProps {
+  durationQuantity: number
+  setDurationQuantity: (quantity: number) => void
+  durationUnit: 'hours' | 'days' | 'weeks'
+  setDurationUnit: (unit: 'hours' | 'days' | 'weeks') => void
 }

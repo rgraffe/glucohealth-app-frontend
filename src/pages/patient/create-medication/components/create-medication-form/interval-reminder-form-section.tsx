@@ -1,15 +1,12 @@
 import {
   IonDatetimeButton,
   IonText,
-  IonIcon,
   IonModal,
   IonDatetime,
   IonChip,
   IonSelect,
   IonSelectOption,
-  IonInput,
 } from '@ionic/react'
-import { add, removeCircle } from 'ionicons/icons'
 import { ByShotsQuantityInput } from './by-shots-quantity-input'
 
 interface Props {
@@ -17,6 +14,10 @@ interface Props {
   setInitialHour: (hour: string) => void
   finalizationType: 'by-final-date' | 'by-shots-quantity' | null
   setFinalizationType: (type: 'by-final-date' | 'by-shots-quantity') => void
+  finalDate: Date
+  setFinalDate: (date: Date) => void
+  shotsQuantity: number
+  setShotsQuantity: (quantity: number) => void
 }
 
 export function IntervalReminderFormSection({
@@ -24,6 +25,10 @@ export function IntervalReminderFormSection({
   setInitialHour,
   finalizationType,
   setFinalizationType,
+  finalDate,
+  setFinalDate,
+  shotsQuantity,
+  setShotsQuantity,
 }: Props) {
   return (
     <>
@@ -75,20 +80,37 @@ export function IntervalReminderFormSection({
           </IonSelectOption>
         </IonSelect>
       </label>
-      {finalizationType === 'by-final-date' && <ByFinalDateInput />}
-      {finalizationType === 'by-shots-quantity' && <ByShotsQuantityInput />}
+      {finalizationType === 'by-final-date' && (
+        <ByFinalDateInput finalDate={finalDate} setFinalDate={setFinalDate} />
+      )}
+      {finalizationType === 'by-shots-quantity' && (
+        <ByShotsQuantityInput
+          shotsQuantity={shotsQuantity}
+          setShotsQuantity={setShotsQuantity}
+        />
+      )}
     </>
   )
 }
 
-function ByFinalDateInput() {
+function ByFinalDateInput({ finalDate, setFinalDate }: ByFinalDateInputPtops) {
   return (
     <label className="flex justify-center gap-2">
       <IonDatetimeButton datetime="final-date-picker"></IonDatetimeButton>
 
       <IonModal keepContentsMounted={true}>
-        <IonDatetime id="final-date-picker" presentation="date"></IonDatetime>
+        <IonDatetime
+          value={finalDate.toISOString()}
+          onIonChange={e => setFinalDate(new Date(e.detail.value as string))}
+          id="final-date-picker"
+          presentation="date"
+        ></IonDatetime>
       </IonModal>
     </label>
   )
+}
+
+interface ByFinalDateInputPtops {
+  finalDate: Date
+  setFinalDate: (date: Date) => void
 }
