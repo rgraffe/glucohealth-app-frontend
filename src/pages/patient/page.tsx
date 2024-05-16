@@ -76,7 +76,7 @@ export function PatientPage() {
 
             {data.age ? (
               <IonChip className="w-[fit-content] mt-5 text-lg">
-                {data.age} 58 años
+                {data.age} años
               </IonChip>
             ) : (
               <IonChip className="w-[fit-content] mt-5 text-lg text-opacity-50">
@@ -93,7 +93,6 @@ export function PatientPage() {
                   ) : (
                     <p className="opacity-50">Sin registrar.</p>
                   )}
-                  <p>{data.weightInKg} </p>
                 </IonText>
               </div>
               <div>
@@ -104,7 +103,6 @@ export function PatientPage() {
                   ) : (
                     <p className="opacity-50">Sin registrar.</p>
                   )}
-                  <p>{data.heightInCm} </p>
                 </IonText>
               </div>
               <div>
