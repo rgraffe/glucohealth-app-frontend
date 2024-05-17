@@ -108,8 +108,11 @@ export function PatientPage() {
               <div>
                 <IonText>
                   <h3>IMC</h3>
-                  {/* TODO: PUT IMC */}
-                  <p className="opacity-50">Sin registrar.</p>
+                  {data.bmi ? (
+                    <p>{data.bmi}</p>
+                  ) : (
+                    <p className="opacity-50">Sin registrar.</p>
+                  )}
                 </IonText>
               </div>
             </section>
