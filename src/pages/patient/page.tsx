@@ -109,7 +109,7 @@ export function PatientPage() {
                 <IonText>
                   <h3>IMC</h3>
                   {data.bmi ? (
-                    <p>{data.bmi}</p>
+                    <p>{data.bmi.toFixed(1)}</p>
                   ) : (
                     <p className="opacity-50">Sin registrar.</p>
                   )}
