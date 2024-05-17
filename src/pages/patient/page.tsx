@@ -106,7 +106,7 @@ export function PatientPage() {
                 </IonText>
               </div>
               <div>
-                <IonText>
+                <IonText className="text-center">
                   <h3>IMC</h3>
                   {data.bmi ? (
                     <p>{data.bmi.toFixed(1)}</p>
@@ -121,8 +121,13 @@ export function PatientPage() {
               <IonText className="text-left">
                 <h2 className="text-3xl font-bold">Tratamiento</h2>
               </IonText>
-              {/*  <p className="opacity-50">Este paciente no tiene tratamiento.</p> */}
-              <TreatmentList />
+              {data.treatments.length > 0 ? (
+                <TreatmentList />
+              ) : (
+                <p className="opacity-50">
+                  Este paciente no tiene tratamiento asignado.
+                </p>
+              )}
             </section>
           </main>
 
