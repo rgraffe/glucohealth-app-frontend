@@ -53,7 +53,6 @@ export function PatientPage() {
 
   if (isError) return <></>
 
-  console.log(data)
   return (
     <>
       <IonPage>
@@ -72,7 +71,7 @@ export function PatientPage() {
                   Nombre sin registrar.
                 </h1>
               )}
-              <h2 className="text-xl my-0">NUI - {data.nationalId}</h2>
+              <h2 className="text-xl my-0">CI - {data.nationalId}</h2>
             </IonText>
 
             {data.age ? (

@@ -4,7 +4,6 @@ import { pencil, trash } from 'ionicons/icons'
 import { QUERY_KEYS } from '~/features/medicaments/constants'
 import { getMedicamentById } from '~/features/medicaments/services/get-by-id'
 import injector_icon_svg from '~/shared/assets/injector-icon.svg'
-import { Medicament } from '~/shared/types/medicament'
 import { TreatmentMedicament } from '~/shared/types/treatment'
 
 interface Props {
@@ -39,7 +38,7 @@ export function TreatmentMedicamentsListItem({ treatmentMedicament }: Props) {
           <h5 className="my-0">{}</h5>
           <p>
             Periodo: {treatmentMedicament.takingSchedulesStartingTimestamp} -{' '}
-            {treatmentMedicament.takingSchedulesStartingTimestamp}
+            {treatmentMedicament.takingSchedulesEndingTimestamp ?? 'Indefinido'}
           </p>
         </IonText>
       </section>
