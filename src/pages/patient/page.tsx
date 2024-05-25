@@ -15,7 +15,7 @@ import { useQuery } from '@tanstack/react-query'
 import { useLocation } from 'react-router'
 import { QUERY_KEYS } from '~/features/patients/constants'
 import { getPatientById } from '~/features/patients/services/get-by-id'
-import { TreatmentList } from './components/treatment-list/treatment-list'
+import { TreatmentMedicamentsList } from './components/treatment-list/treatment-list'
 import { add } from 'ionicons/icons'
 import { ROUTES } from '~/shared/constants/routes'
 
@@ -32,8 +32,8 @@ export function PatientPage() {
     enabled: !!id,
     queryKey: [QUERY_KEYS.PATIENT_DATA],
     queryFn: async () => {
-      present()
       try {
+        present()
         const patient = await getPatientById(id!)
         return patient
       } catch (e) {
@@ -46,13 +46,14 @@ export function PatientPage() {
 
   if (!id) {
     //TODO: REDIRECT
-    return <h1>Error...</h1>
+    return <></>
   }
 
   if (isPending || isFetching) return null
 
-  if (isError) return <h1>Error...</h1>
+  if (isError) return <></>
 
+  console.log(data)
   return (
     <>
       <IonPage>
@@ -121,8 +122,10 @@ export function PatientPage() {
               <IonText className="text-left">
                 <h2 className="text-3xl font-bold">Tratamiento</h2>
               </IonText>
-              {data.treatments.length > 0 ? (
-                <TreatmentList />
+              {data.treatment?.medicaments?.length > 0 ? (
+                <TreatmentMedicamentsList
+                  treatmentMedicaments={data.treatment.medicaments}
+                />
               ) : (
                 <p className="opacity-50">
                   Este paciente no tiene tratamiento asignado.
@@ -133,7 +136,7 @@ export function PatientPage() {
 
           <IonFab className="fixed bottom-5 right-6">
             <IonFabButton
-              routerLink={ROUTES.APP.PATIENT.CREATE_MEDICATION.PATH}
+              routerLink={`${ROUTES.APP.PATIENT.CREATE_MEDICATION.PATH}?treatment-id=${data.treatment.id}`}
             >
               <IonIcon icon={add}></IonIcon>
             </IonFabButton>

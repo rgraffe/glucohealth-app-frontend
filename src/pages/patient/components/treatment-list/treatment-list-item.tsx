@@ -1,16 +1,30 @@
 import { IonButton, IonIcon, IonText } from '@ionic/react'
+import { useQuery } from '@tanstack/react-query'
 import { pencil, trash } from 'ionicons/icons'
+import { QUERY_KEYS } from '~/features/medicaments/constants'
+import { getMedicamentById } from '~/features/medicaments/services/get-by-id'
 import injector_icon_svg from '~/shared/assets/injector-icon.svg'
+import { Medicament } from '~/shared/types/medicament'
+import { TreatmentMedicament } from '~/shared/types/treatment'
 
-export function TreatmentListItem() {
+interface Props {
+  treatmentMedicament: TreatmentMedicament
+}
+
+export function TreatmentMedicamentsListItem({ treatmentMedicament }: Props) {
+  const { data } = useQuery({
+    queryKey: [QUERY_KEYS.MEDICAMENT_INFO],
+    queryFn: () => getMedicamentById(treatmentMedicament.medicamentId + ''),
+  })
+
   return (
     <li>
       <header>
         <IonText className="flex items-center">
           <h4 className="text-md font-thin my-0 w-[30%] text-center">
-            09:30 am
+            {treatmentMedicament.takingSchedules.join(', ')}
           </h4>
-          <h3 className="text-2xl my-0">Metformina</h3>
+          <h3 className="text-2xl my-0">{data?.tradeName}</h3>
 
           <div className="flex justify-end flex-grow gap-3">
             <IonIcon icon={pencil} size="large" />
@@ -21,8 +35,12 @@ export function TreatmentListItem() {
       <section className="flex items-center">
         <IonIcon src={injector_icon_svg} className="h-[40px] w-[30%]" />
         <IonText className="flex flex-col gap-3">
-          <h5 className="my-0">500 mg</h5>
-          <p>Periodo: 04/24/2024 - 05/12/2024</p>
+          {/* TODO: AMOUNT OF MEDICAMENT */}
+          <h5 className="my-0">{}</h5>
+          <p>
+            Periodo: {treatmentMedicament.takingSchedulesStartingTimestamp} -{' '}
+            {treatmentMedicament.takingSchedulesStartingTimestamp}
+          </p>
         </IonText>
       </section>
       <footer className="w-full flex justify-end px-5">

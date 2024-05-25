@@ -8,6 +8,7 @@ import {
   IonSelect,
   IonSelectOption,
   IonInput,
+  IonCheckbox,
 } from '@ionic/react'
 import { add, removeCircle } from 'ionicons/icons'
 import { ByShotsQuantityInput } from './by-shots-quantity-input'
@@ -16,6 +17,8 @@ interface Props {
   hours: string[]
   addHour: (hour: string) => void
   removeHour: (hour: string) => void
+  hasFinalization: boolean
+  setHasFinalization: (has: boolean) => void
   finalizationType: 'by-duration' | 'by-shots-quantity' | null
   setFinalizationType: (type: 'by-duration' | 'by-shots-quantity') => void
   durationQuantity: number
@@ -30,6 +33,8 @@ export function FixedReminderFormSection({
   hours,
   addHour,
   removeHour,
+  hasFinalization,
+  setHasFinalization,
   finalizationType,
   setFinalizationType,
   durationQuantity,
@@ -81,33 +86,46 @@ export function FixedReminderFormSection({
         )}
       </div>
 
-      <label>
-        <span className="text-2xl">Finalización</span>
-        <IonSelect
-          label="Por"
-          onIonChange={e => {
-            setFinalizationType(e.detail.value)
-          }}
-        >
-          <IonSelectOption value="by-duration">Duración</IonSelectOption>
-          <IonSelectOption value="by-shots-quantity">
-            Cantidad de tomas
-          </IonSelectOption>
-        </IonSelect>
-      </label>
-      {finalizationType === 'by-duration' && (
-        <ByDurationInput
-          durationQuantity={durationQuantity}
-          durationUnit={durationUnit}
-          setDurationQuantity={setDurationQuantity}
-          setDurationUnit={setDurationUnit}
-        />
-      )}
-      {finalizationType === 'by-shots-quantity' && (
-        <ByShotsQuantityInput
-          shotsQuantity={shotsQuantity}
-          setShotsQuantity={setShotsQuantity}
-        />
+      <IonCheckbox
+        checked={hasFinalization}
+        onIonChange={e => setHasFinalization(e.detail.checked)}
+        className="text-lg italic"
+        justify="start"
+      >
+        Tiene finalización
+      </IonCheckbox>
+
+      {hasFinalization && (
+        <>
+          <label>
+            <span className="text-2xl">Finalización</span>
+            <IonSelect
+              label="Por"
+              onIonChange={e => {
+                setFinalizationType(e.detail.value)
+              }}
+            >
+              <IonSelectOption value="by-duration">Duración</IonSelectOption>
+              <IonSelectOption value="by-shots-quantity">
+                Cantidad de tomas
+              </IonSelectOption>
+            </IonSelect>
+          </label>
+          {finalizationType === 'by-duration' && (
+            <ByDurationInput
+              durationQuantity={durationQuantity}
+              durationUnit={durationUnit}
+              setDurationQuantity={setDurationQuantity}
+              setDurationUnit={setDurationUnit}
+            />
+          )}
+          {finalizationType === 'by-shots-quantity' && (
+            <ByShotsQuantityInput
+              shotsQuantity={shotsQuantity}
+              setShotsQuantity={setShotsQuantity}
+            />
+          )}
+        </>
       )}
     </>
   )

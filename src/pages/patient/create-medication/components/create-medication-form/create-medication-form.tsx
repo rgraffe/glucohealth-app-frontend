@@ -1,14 +1,32 @@
-import { IonButton, IonSelect, IonSelectOption } from '@ionic/react'
+import {
+  IonButton,
+  IonDatetime,
+  IonDatetimeButton,
+  IonModal,
+  IonSpinner,
+  useIonLoading,
+} from '@ionic/react'
 import { ReminderTypeSelector } from './reminder-type-selector'
 import { FixedReminderFormSection } from './fixed-reminder-form-section'
 import { IntervalReminderFormSection } from './interval-reminder-form-section'
 import { useFormik } from 'formik'
-import { WEEK_DAYS, WEEK_DAYS_TRANSLATIONS } from '~/shared/constants/week-days'
+import Typeahead from '../typeahead/typeahead'
+import { useRef } from 'react'
+import { useQuery, useQueryClient } from '@tanstack/react-query'
+import { getPaginatedMedicaments } from '~/features/medicaments/services/get-paginated'
+import { QUERY_KEYS } from '~/features/medicaments/constants'
+import { QUERY_KEYS as PATIENTS_QUERY_KEYS } from '~/features/patients/constants'
+import { Treatment } from '~/shared/types/treatment'
+import { createMedicationFormValuesSchema } from './form-values-schema'
+import { updateTreatment } from '~/features/treatments/services/update'
+import { constructUpdateTreatmentDto } from './construct-dto'
+import { useHistory } from 'react-router'
 
-interface FormValues {
-  medication: string
+export interface CreateMedicationFormValues {
+  medicamentId: number | null
   reminderType: 'fixed' | 'interval'
-  initialDay: (typeof WEEK_DAYS)[number] | null
+  initialDate: Date
+  hasFinalization: boolean
   fixedHours: string[]
   fixedFinalizationType: 'by-duration' | 'by-shots-quantity' | null
   fixedDurationQuantity: number
@@ -20,13 +38,20 @@ interface FormValues {
   intervalShotsQuantity: number
 }
 
-export function CreateMedicationForm() {
-  const { values, setFieldValue, handleSubmit, handleChange } =
-    useFormik<FormValues>({
+export function CreateMedicationForm({ treatment }: { treatment: Treatment }) {
+  const history = useHistory()
+
+  const queryClient = useQueryClient()
+
+  const [present, dismiss] = useIonLoading()
+
+  const { values, setFieldValue, handleSubmit, handleChange, isValid } =
+    useFormik<CreateMedicationFormValues>({
       initialValues: {
-        medication: '',
+        medicamentId: null,
         reminderType: 'fixed',
-        initialDay: null,
+        initialDate: new Date(),
+        hasFinalization: true,
         fixedHours: [],
         fixedFinalizationType: null,
         fixedDurationQuantity: 0,
@@ -37,13 +62,36 @@ export function CreateMedicationForm() {
         intervalFinalDate: new Date(),
         intervalShotsQuantity: 0,
       },
-      onSubmit: values => {
-        console.log(
-          createCronExpression(values),
-          JSON.stringify(values, null, 2),
-        )
+      validateOnMount: true,
+      validationSchema: createMedicationFormValuesSchema,
+      onSubmit: async values => {
+        try {
+          present()
+
+          await updateTreatment(
+            treatment.id,
+            constructUpdateTreatmentDto(treatment, values),
+          )
+
+          await queryClient.invalidateQueries({
+            queryKey: [PATIENTS_QUERY_KEYS.PATIENT_DATA],
+          })
+
+          history.goBack()
+        } catch (e) {
+          console.error(e)
+        } finally {
+          dismiss()
+        }
       },
     })
+
+  const { data } = useQuery({
+    queryFn: () => getPaginatedMedicaments({ pageIndex: 1, itemsPerPage: 500 }),
+    queryKey: [QUERY_KEYS.MEDICAMENTS_LIST],
+  })
+
+  const medicamentSelectionModal = useRef<HTMLIonModalElement>(null)
 
   function addHour(hour: string) {
     hour = hour.split('T')[1].slice(0, 5)
@@ -60,15 +108,58 @@ export function CreateMedicationForm() {
     )
   }
 
+  function medicamentSelectionChanged(medicamentId: number) {
+    setFieldValue('medicamentId', medicamentId)
+    medicamentSelectionModal.current?.dismiss()
+  }
+
   return (
     <form
       onSubmit={handleSubmit}
       onChange={handleChange}
       className="flex flex-col gap-8"
     >
-      <label>
-        <span className="text-2xl">Medicamento</span>
-        <IonSelect label="Selecciona el medicamento"></IonSelect>
+      <label className="flex flex-col gap-2">
+        <div className="flex justify-between items-center">
+          <span className="text-2xl">Medicamento</span>
+          {values.medicamentId !== null ? (
+            <span className="text-xl">
+              {data?.items.find(m => m.id === values.medicamentId)?.tradeName}
+            </span>
+          ) : (
+            <span className="text-md italic opacity-70">No seleccionado.</span>
+          )}
+        </div>
+        {data !== undefined ? (
+          <>
+            <IonButton className="w-full h-[50px]" id="select-medicament">
+              Seleccionar medicamento
+            </IonButton>
+            <IonModal
+              trigger="select-medicament"
+              ref={medicamentSelectionModal}
+            >
+              <Typeahead
+                items={data.items.map(m => ({
+                  text: m.tradeName,
+                  value: m.id,
+                }))}
+                selectedItem={values.medicamentId}
+                title="Medicamentos"
+                onSelectionChange={medicamentSelectionChanged}
+                onSelectionCancel={() =>
+                  medicamentSelectionModal.current?.dismiss()
+                }
+              ></Typeahead>
+            </IonModal>
+          </>
+        ) : (
+          <>
+            <IonButton className="w-full opacity-60 h-[50px]">
+              <IonSpinner slot="" />
+            </IonButton>
+          </>
+        )}
       </label>
 
       <label>
@@ -79,19 +170,22 @@ export function CreateMedicationForm() {
         />
       </label>
 
-      <label className="w-full">
-        <span className="text-2xl">Día de inicio</span>
-        <IonSelect
-          onIonChange={e => setFieldValue('initialDay', e.detail.value)}
-          className="w-full"
-          label="Selecciona el día de inicio"
-        >
-          {WEEK_DAYS.map(day => (
-            <IonSelectOption key={day} value={day}>
-              {WEEK_DAYS_TRANSLATIONS[day]}
-            </IonSelectOption>
-          ))}
-        </IonSelect>
+      <label className="w-full flex justify-between">
+        <span className="text-2xl">Fecha de inicio</span>
+        <label className="flex justify-center gap-2">
+          <IonDatetimeButton datetime="initial-date-picker"></IonDatetimeButton>
+
+          <IonModal keepContentsMounted={true}>
+            <IonDatetime
+              value={values.initialDate.toISOString()}
+              onIonChange={e =>
+                setFieldValue('initialDate', new Date(e.detail.value as string))
+              }
+              id="initial-date-picker"
+              presentation="date"
+            ></IonDatetime>
+          </IonModal>
+        </label>
       </label>
 
       {values.reminderType === 'fixed' && (
@@ -100,6 +194,8 @@ export function CreateMedicationForm() {
             hours={values.fixedHours}
             addHour={addHour}
             removeHour={removeHour}
+            hasFinalization={values.hasFinalization}
+            setHasFinalization={has => setFieldValue('hasFinalization', has)}
             finalizationType={values.fixedFinalizationType}
             setFinalizationType={type =>
               setFieldValue('fixedFinalizationType', type)
@@ -122,6 +218,8 @@ export function CreateMedicationForm() {
         <IntervalReminderFormSection
           initialHour={values.intervalInitialHour}
           setInitialHour={hour => setFieldValue('intervalInitialHour', hour)}
+          hasFinalization={values.hasFinalization}
+          setHasFinalization={has => setFieldValue('hasFinalization', has)}
           finalizationType={values.intervalFinalizationType}
           setFinalizationType={type =>
             setFieldValue('intervalFinalizationType', type)
@@ -136,44 +234,13 @@ export function CreateMedicationForm() {
       )}
 
       <footer className="w-full flex justify-end">
-        <IonButton type="submit" className="w-[40%]">
+        <IonButton
+          type="submit"
+          className={`w-[40%] ${isValid ? 'opacity-100' : 'opacity-60'}`}
+        >
           Guardar
         </IonButton>
       </footer>
     </form>
   )
-}
-
-const createCronExpression = (values: FormValues) => {
-  if (values.reminderType === 'fixed') {
-    return createFixedCronExpression(values)
-  }
-
-  return createIntervalCronExpression(values)
-}
-
-const createFixedCronExpression = (values: FormValues) => {
-  const hours = values.fixedHours.map(hour => hour.split(':')[0])
-
-  return `0 0 ${hours.join(',')} * * *`
-}
-
-const createIntervalCronExpression = (values: FormValues) => {
-  const [initialHour, initialMinute] = values.intervalInitialHour.split(':')
-
-  if (values.intervalFinalizationType === 'by-final-date') {
-    const finalDate = values.intervalFinalDate
-    const [finalHour, finalMinute] = finalDate
-      .toISOString()
-      .split('T')[1]
-      .slice(0, 5)
-
-    return `* ${initialMinute} ${initialHour} * * *`
-  }
-
-  if (values.intervalFinalizationType === 'by-shots-quantity') {
-    const shots = values.intervalShotsQuantity
-
-    return `* * ${initialHour} * * *`
-  }
 }

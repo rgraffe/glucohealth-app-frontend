@@ -1,9 +1,21 @@
-import { TreatmentListItem } from './treatment-list-item'
+import { Treatment, TreatmentMedicament } from '~/shared/types/treatment'
+import { TreatmentMedicamentsListItem } from './treatment-list-item'
 
-export function TreatmentList() {
+interface Props {
+  treatmentMedicaments: TreatmentMedicament[]
+}
+
+export function TreatmentMedicamentsList({
+  treatmentMedicaments: medicaments,
+}: Props) {
   return (
     <ul>
-      <TreatmentListItem />
+      {medicaments.map(m => (
+        <TreatmentMedicamentsListItem
+          key={m.medicamentId}
+          treatmentMedicament={m}
+        />
+      ))}
     </ul>
   )
 }

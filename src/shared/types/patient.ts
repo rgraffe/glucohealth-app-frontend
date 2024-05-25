@@ -6,5 +6,5 @@ export interface Patient extends User {
   weightInKg: number
   heightInCm: number
   bmi: number
-  treatments: Treatment[]
+  treatment: Treatment
 }

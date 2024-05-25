@@ -6,7 +6,7 @@ export interface Treatment {
 export interface TreatmentMedicament {
   medicamentId: number
   takingSchedulesStartingTimestamp: string
-  takingSchedulesEndingTimestamp: string
+  takingSchedulesEndingTimestamp?: string
   takingSchedules: {
     takingSchedule: string
   }[]

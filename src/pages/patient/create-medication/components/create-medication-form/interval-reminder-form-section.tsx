@@ -6,12 +6,15 @@ import {
   IonChip,
   IonSelect,
   IonSelectOption,
+  IonCheckbox,
 } from '@ionic/react'
 import { ByShotsQuantityInput } from './by-shots-quantity-input'
 
 interface Props {
   initialHour: string
   setInitialHour: (hour: string) => void
+  hasFinalization: boolean
+  setHasFinalization: (has: boolean) => void
   finalizationType: 'by-final-date' | 'by-shots-quantity' | null
   setFinalizationType: (type: 'by-final-date' | 'by-shots-quantity') => void
   finalDate: Date
@@ -23,6 +26,8 @@ interface Props {
 export function IntervalReminderFormSection({
   initialHour,
   setInitialHour,
+  hasFinalization,
+  setHasFinalization,
   finalizationType,
   setFinalizationType,
   finalDate,
@@ -66,28 +71,46 @@ export function IntervalReminderFormSection({
         )}
       </div>
 
-      <label>
-        <span className="text-2xl">Finalización</span>
-        <IonSelect
-          label="Por"
-          onIonChange={e => {
-            setFinalizationType(e.detail.value)
-          }}
-        >
-          <IonSelectOption value="by-final-date">Fecha final</IonSelectOption>
-          <IonSelectOption value="by-shots-quantity">
-            Cantidad de tomas
-          </IonSelectOption>
-        </IonSelect>
-      </label>
-      {finalizationType === 'by-final-date' && (
-        <ByFinalDateInput finalDate={finalDate} setFinalDate={setFinalDate} />
-      )}
-      {finalizationType === 'by-shots-quantity' && (
-        <ByShotsQuantityInput
-          shotsQuantity={shotsQuantity}
-          setShotsQuantity={setShotsQuantity}
-        />
+      <IonCheckbox
+        checked={hasFinalization}
+        onIonChange={e => setHasFinalization(e.detail.checked)}
+        className="text-lg italic"
+        justify="start"
+      >
+        Tiene finalización
+      </IonCheckbox>
+
+      {hasFinalization && (
+        <>
+          <label>
+            <span className="text-2xl">Finalización</span>
+            <IonSelect
+              label="Por"
+              onIonChange={e => {
+                setFinalizationType(e.detail.value)
+              }}
+            >
+              <IonSelectOption value="by-final-date">
+                Fecha final
+              </IonSelectOption>
+              <IonSelectOption value="by-shots-quantity">
+                Cantidad de tomas
+              </IonSelectOption>
+            </IonSelect>
+          </label>
+          {finalizationType === 'by-final-date' && (
+            <ByFinalDateInput
+              finalDate={finalDate}
+              setFinalDate={setFinalDate}
+            />
+          )}
+          {finalizationType === 'by-shots-quantity' && (
+            <ByShotsQuantityInput
+              shotsQuantity={shotsQuantity}
+              setShotsQuantity={setShotsQuantity}
+            />
+          )}
+        </>
       )}
     </>
   )
