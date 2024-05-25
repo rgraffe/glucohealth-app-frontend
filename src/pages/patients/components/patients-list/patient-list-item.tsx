@@ -16,7 +16,7 @@ export function PatientListItem({ patient }: Props) {
       <div className="w-full flex flex-col">
         <IonLabel>
           <h2>{patient.fullName}</h2>
-          <h3>NUI - {patient.nationalId}</h3>
+          <h3>CI - {patient.nationalId}</h3>
         </IonLabel>
         <IonButton
           routerLink={`${ROUTES.APP.PATIENT.PATH}?id=${patient.id}`}
