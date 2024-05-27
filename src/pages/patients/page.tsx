@@ -28,12 +28,11 @@ export function PatientsPage() {
             <IonText className="text-center">
               <h1 className="text-3xl">Pacientes</h1>
             </IonText>
-            <div className="w-full mt-5 flex flex-col items-center max-w-xl px-8">
+            <div className="w-full mt-5 mb-4 flex flex-col items-center max-w-xl px-8">
               <p className="text-lg">Busque a un paciente</p>
               <IonSearchbar placeholder="Cédula de Identidad"></IonSearchbar>
             </div>
           </header>
-          <div className="w-full mt-4 mb-6 h-[1px] bg-black dark:bg-white" />
 
           <PatientsList />
 

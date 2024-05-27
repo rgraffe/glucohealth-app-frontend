@@ -26,9 +26,9 @@ export function TabsLayout({ children }: Props) {
           <IonIcon aria-hidden="true" icon={person} />
           <IonLabel>Pacientes</IonLabel>
         </IonTabButton>
-        <IonTabButton tab="settings" href={ROUTES.APP.SETTINGS.PATH}>
+        <IonTabButton tab="profile" href={ROUTES.APP.SETTINGS.PATH}>
           <IonIcon aria-hidden="true" icon={settings} />
-          <IonLabel>Configuración</IonLabel>
+          <IonLabel>Perfil</IonLabel>
         </IonTabButton>
       </IonTabBar>
     </IonTabs>
