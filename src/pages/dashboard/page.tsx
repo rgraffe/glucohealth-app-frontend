@@ -24,7 +24,7 @@ export function DashboardPage() {
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
-        <main className="w-full h-full flex flex-col px-4">
+        <main className="w-full h-full flex flex-col px-4 max-w-xl m-auto">
           <IonCard routerLink={ROUTES.APP.PATIENTS.PATH} className="min-h-6">
             <img src={patientsImg}></img>
             <IonCardHeader>

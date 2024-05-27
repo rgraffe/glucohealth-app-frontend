@@ -28,7 +28,7 @@ export function SettingsPage() {
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
-        <main className="w-full h-full flex flex-col px-4 pb-5 justify-between items-center">
+        <main className="w-full h-full flex flex-col px-4 pb-5 justify-between items-center max-w-xl m-auto">
           <section>
             <h1 className="text-xl opacity-70">Información personal</h1>
             <ul className="text-xl text-center">
