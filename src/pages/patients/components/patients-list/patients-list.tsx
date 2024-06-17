@@ -47,7 +47,7 @@ export function PatientsList() {
 
   return (
     <>
-      <IonList className="overflow-y-scroll max-w-xl gap-5 w-full">
+      <IonList className="max-w-xl gap-5 w-full">
         {data?.pages?.map(p => (
           <Fragment key={p.pageIndex}>
             {p.items.map(patient => (
@@ -55,15 +55,15 @@ export function PatientsList() {
             ))}
           </Fragment>
         ))}
+        <IonInfiniteScroll
+          onIonInfinite={async ev => {
+            await fetchNextPage()
+            ev.target.complete()
+          }}
+        >
+          <IonInfiniteScrollContent></IonInfiniteScrollContent>
+        </IonInfiniteScroll>
       </IonList>
-      <IonInfiniteScroll
-        onIonInfinite={async ev => {
-          await fetchNextPage()
-          ev.target.complete()
-        }}
-      >
-        <IonInfiniteScrollContent></IonInfiniteScrollContent>
-      </IonInfiniteScroll>
     </>
   )
 }

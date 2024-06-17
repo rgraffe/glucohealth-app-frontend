@@ -1,5 +1,5 @@
 import { IonButton, IonIcon, IonText } from '@ionic/react'
-import { useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery } from '@tanstack/react-query'
 import { pencil, trash } from 'ionicons/icons'
 import { QUERY_KEYS } from '~/features/medicaments/constants'
 import { getMedicamentById } from '~/features/medicaments/services/get-by-id'
@@ -20,14 +20,24 @@ export function TreatmentMedicamentsListItem({ treatmentMedicament }: Props) {
     <li>
       <header>
         <IonText className="flex items-center">
-          <h4 className="text-md font-thin my-0 w-[30%] text-center">
-            {treatmentMedicament.takingSchedules.join(', ')}
-          </h4>
+          <ul className="text-md font-thin my-0 w-[30%] text-center">
+            {treatmentMedicament.takingSchedules.map(ts => (
+              <li>{ts.takingSchedule}</li>
+            ))}
+          </ul>
           <h3 className="text-2xl my-0">{data?.tradeName}</h3>
 
           <div className="flex justify-end flex-grow gap-3">
-            <IonIcon icon={pencil} size="large" />
-            <IonIcon icon={trash} size="large" />
+            <IonIcon
+              className="hover:cursor-pointer"
+              icon={pencil}
+              size="large"
+            />
+            <IonIcon
+              className="hover:cursor-pointer"
+              icon={trash}
+              size="large"
+            />
           </div>
         </IonText>
       </header>
@@ -37,8 +47,12 @@ export function TreatmentMedicamentsListItem({ treatmentMedicament }: Props) {
           {/* TODO: AMOUNT OF MEDICAMENT */}
           <h5 className="my-0">{}</h5>
           <p>
-            Periodo: {treatmentMedicament.takingSchedulesStartingTimestamp} -{' '}
-            {treatmentMedicament.takingSchedulesEndingTimestamp ?? 'Indefinido'}
+            Periodo:{' '}
+            {treatmentMedicament.takingSchedulesStartingTimestamp.split('T')[0]}{' '}
+            -{' '}
+            {treatmentMedicament.takingSchedulesEndingTimestamp?.split(
+              'T',
+            )[0] ?? 'Indefinido'}
           </p>
         </IonText>
       </section>

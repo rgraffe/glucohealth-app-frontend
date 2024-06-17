@@ -32,7 +32,7 @@ export function constructUpdateTreatmentDto(
       const [hour, minutes] = time.split(':')
 
       return {
-        takingSchedule: `* ${minutes} ${hour} * * *`,
+        takingSchedule: `0 ${minutes} ${hour} * * *`,
       }
     })
   }
@@ -42,7 +42,7 @@ export function constructUpdateTreatmentDto(
 
     newMedicament.takingSchedules = [
       {
-        takingSchedule: `* ${minutes} ${hour} * * *`,
+        takingSchedule: `0 ${minutes} ${hour} * * *`,
       },
     ]
   }
