@@ -14,6 +14,7 @@ export const ROUTES = {
     PATIENT: {
       PATH: '/app/patient',
       CREATE_MEDICATION: { PATH: '/app/patient/create-medication' },
+      FULLFILMENT: { PATH: '/app/patient/fullfilment' },
     },
     SETTINGS: { PATH: '/app/settings' },
   },

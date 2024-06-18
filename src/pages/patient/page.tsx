@@ -10,6 +10,7 @@ import {
   IonFab,
   IonFabButton,
   IonIcon,
+  IonButton,
 } from '@ionic/react'
 import { useQuery } from '@tanstack/react-query'
 import { useLocation } from 'react-router'
@@ -126,9 +127,17 @@ export function PatientPage() {
             </section>
 
             <section className="w-full mt-6">
-              <IonText className="text-left">
-                <h2 className="ml-4 text-xl font-bold">Tratamiento</h2>
-              </IonText>
+              <div className="flex justify-between">
+                <IonText className="text-left">
+                  <h2 className="ml-4 text-xl font-bold">Tratamiento</h2>
+                </IonText>
+                <IonButton
+                  size="small"
+                  routerLink={`${ROUTES.APP.PATIENT.FULLFILMENT.PATH}?id=${id}`}
+                >
+                  Ver cumplimiento
+                </IonButton>
+              </div>
               {data.treatment?.medicaments?.length > 0 ? (
                 <TreatmentMedicamentsList
                   treatmentMedicaments={data.treatment.medicaments}

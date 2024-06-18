@@ -52,6 +52,7 @@ import {
 import { ROUTES } from '~/shared/constants/routes'
 import Providers from './providers'
 import { loginFromLocalStorage } from '~/features/auth/model/auth'
+import { PatientFullfilmentPage } from '~/pages/patient/fulfillment/page'
 
 setupIonicReact()
 
@@ -107,6 +108,12 @@ export const App: React.FC = () => {
                     exact
                     path={ROUTES.APP.PATIENT.CREATE_MEDICATION.PATH}
                     component={PatientCreateMedicationPage}
+                  />
+
+                  <Route
+                    exact
+                    path={ROUTES.APP.PATIENT.FULLFILMENT.PATH}
+                    component={PatientFullfilmentPage}
                   />
 
                   <Route
