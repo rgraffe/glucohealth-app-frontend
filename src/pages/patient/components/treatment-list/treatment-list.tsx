@@ -1,4 +1,4 @@
-import { Treatment, TreatmentMedicament } from '~/shared/types/treatment'
+import { TreatmentMedicament } from '~/shared/types/treatment'
 import { TreatmentMedicamentsListItem } from './treatment-list-item'
 
 interface Props {

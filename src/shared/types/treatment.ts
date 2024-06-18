@@ -5,6 +5,7 @@ export interface Treatment {
 
 export interface TreatmentMedicament {
   medicamentId: number
+  dose: string
   takingSchedulesStartingTimestamp: string
   takingSchedulesEndingTimestamp?: string
   takingSchedules: {

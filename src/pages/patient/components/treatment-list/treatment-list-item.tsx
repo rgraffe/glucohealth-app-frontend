@@ -12,7 +12,9 @@ interface Props {
 
 export function TreatmentMedicamentsListItem({ treatmentMedicament }: Props) {
   const { data } = useQuery({
-    queryKey: [QUERY_KEYS.MEDICAMENT_INFO],
+    queryKey: [
+      `${QUERY_KEYS.MEDICAMENT_INFO}-${treatmentMedicament.medicamentId}`,
+    ],
     queryFn: () => getMedicamentById(treatmentMedicament.medicamentId + ''),
   })
 

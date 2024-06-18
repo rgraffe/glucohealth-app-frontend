@@ -2,6 +2,7 @@ import {
   IonButton,
   IonDatetime,
   IonDatetimeButton,
+  IonInput,
   IonModal,
   IonSpinner,
   useIonLoading,
@@ -24,6 +25,7 @@ import { useHistory } from 'react-router'
 
 export interface CreateMedicationFormValues {
   medicamentId: number | null
+  dose: string
   reminderType: 'fixed' | 'interval'
   initialDate: Date
   hasFinalization: boolean
@@ -49,6 +51,7 @@ export function CreateMedicationForm({ treatment }: { treatment: Treatment }) {
     useFormik<CreateMedicationFormValues>({
       initialValues: {
         medicamentId: null,
+        dose: '',
         reminderType: 'fixed',
         initialDate: new Date(),
         hasFinalization: true,
@@ -160,6 +163,14 @@ export function CreateMedicationForm({ treatment }: { treatment: Treatment }) {
             </IonButton>
           </>
         )}
+      </label>
+
+      <label>
+        <span className="text-2xl block">Dosis de la medicación</span>
+        <IonInput
+          onIonChange={e => setFieldValue('dose', e.detail.value)}
+          placeholder="500 mg"
+        ></IonInput>
       </label>
 
       <label>

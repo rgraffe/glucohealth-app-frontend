@@ -8,6 +8,7 @@ export function constructUpdateTreatmentDto(
 ): UpdateTreatmentDto {
   const {
     medicamentId,
+    dose,
     initialDate,
     hasFinalization,
     reminderType,
@@ -23,6 +24,7 @@ export function constructUpdateTreatmentDto(
   } = values
 
   let newMedicament: Partial<TreatmentMedicament> = {
+    dose,
     medicamentId: medicamentId!,
     takingSchedulesStartingTimestamp: initialDate.toISOString(),
   }

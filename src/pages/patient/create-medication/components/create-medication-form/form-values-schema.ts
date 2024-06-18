@@ -2,6 +2,7 @@ import { array, boolean, number, object, string, date } from 'yup'
 
 export const createMedicationFormValuesSchema = object({
   medicamentId: number().required(),
+  dose: string().required(),
   initialDate: date().required(),
   hasFinalization: boolean().required(),
   reminderType: string().oneOf(['fixed', 'interval']).required(),
