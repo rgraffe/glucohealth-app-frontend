@@ -48,7 +48,7 @@ export function FixedReminderFormSection({
     <>
       <div className="flex flex-col gap-3">
         <label className="flex justify-between items-center">
-          <span className="text-2xl">Hora</span>
+          <span className="text-xl font-bold block">Hora</span>
 
           <IonDatetimeButton datetime="hour-input">
             <IonText slot="time-target" className="flex items-center gap-2">
@@ -98,7 +98,7 @@ export function FixedReminderFormSection({
       {hasFinalization && (
         <>
           <label>
-            <span className="text-2xl">Finalización</span>
+            <span className="text-xl font-bold block">Finalización</span>
             <IonSelect
               label="Por"
               onIonChange={e => {

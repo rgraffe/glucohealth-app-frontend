@@ -121,13 +121,13 @@ export function CreateMedicationForm({ treatment }: { treatment: Treatment }) {
     >
       <label className="flex flex-col gap-2">
         <div className="flex justify-between items-center">
-          <span className="text-2xl">Medicamento</span>
+          <span className="text-xl font-bold block">Medicamento</span>
           {values.medicamentId !== null ? (
             <span className="text-xl">
               {data?.items.find(m => m.id === values.medicamentId)?.tradeName}
             </span>
           ) : (
-            <span className="text-md italic opacity-70">No seleccionado.</span>
+            <span className="text-md italic opacity-70">No seleccionado</span>
           )}
         </div>
         {data !== undefined ? (
@@ -163,7 +163,7 @@ export function CreateMedicationForm({ treatment }: { treatment: Treatment }) {
       </label>
 
       <label>
-        <span className="text-2xl block">Tipo de recordatorio</span>
+        <span className="text-xl font-bold block">Tipo de recordatorio</span>
         <ReminderTypeSelector
           reminderType={values.reminderType}
           setReminderType={type => setFieldValue('reminderType', type)}
@@ -171,7 +171,7 @@ export function CreateMedicationForm({ treatment }: { treatment: Treatment }) {
       </label>
 
       <label className="w-full flex justify-between">
-        <span className="text-2xl">Fecha de inicio</span>
+        <span className="text-xl font-bold block">Fecha de inicio</span>
         <label className="flex justify-center gap-2">
           <IonDatetimeButton datetime="initial-date-picker"></IonDatetimeButton>
 
