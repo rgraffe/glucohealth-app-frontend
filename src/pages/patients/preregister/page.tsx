@@ -18,7 +18,7 @@ export function PatientPreregisterPage() {
       </IonHeader>
       <IonContent fullscreen>
         <main className="w-full h-full flex flex-col justify-center items-center px-5 gap-8">
-          <PageHeader text="Para prerregistrar a un paciente solo necesitas su correo electrónico y N.U.I. Cuando el paciente inicie sesión en la aplicación deberá ingresar sus datos personales." />
+          <PageHeader text="Para registrar a un nuevo paciente, ingrese el correo electrónico y CI del paciente. Cuando el paciente inicie sesión en su aplicación deberá ingresar sus datos personales." />
           <PreregisterForm />
         </main>
       </IonContent>

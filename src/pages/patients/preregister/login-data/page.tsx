@@ -8,6 +8,7 @@ import {
   IonInput,
   IonIcon,
   IonButton,
+  IonTextarea,
 } from '@ionic/react'
 import { PageHeader } from '../components/page-header'
 import { key, mail } from 'ionicons/icons'
@@ -40,17 +41,14 @@ export function PatientPreregisterLoginDataPage() {
       </IonHeader>
       <IonContent fullscreen>
         <main className="w-full h-full flex flex-col justify-center items-center px-5 gap-8">
-          <PageHeader text="Los datos también serán enviados al correo electrónico del usuario." />
-
-          <IonText>
-            <h3>Datos de inicio de sesión del usuario</h3>
-          </IonText>
+          <h3 className="ml-4 text-xl font-bold">
+            Inicio de sesión del usuario
+          </h3>
 
           <section>
             <div className="flex items-center">
               <IonIcon icon={mail} className="w-20 h-8" />
               <IonInput
-                disabled
                 label="Correo electrónico"
                 labelPlacement="stacked"
                 value={email}
@@ -59,12 +57,18 @@ export function PatientPreregisterLoginDataPage() {
             <div className="flex items-center">
               <IonIcon icon={key} className="w-20 h-8" />
               <IonInput
-                disabled
                 label="Contraseña (Provisional)"
                 labelPlacement="stacked"
                 value={password}
               />
             </div>
+          </section>
+
+          <section className="flex justify-center items-center w-full mt-5">
+            <IonTextarea className="text-center" disabled={true}>
+              Los datos también serán enviados al correo electrónico del
+              usuario.
+            </IonTextarea>
           </section>
 
           <IonButton routerLink={ROUTES.APP.PATIENTS.PATH}>

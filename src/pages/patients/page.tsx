@@ -15,6 +15,8 @@ import { ROUTES } from '~/shared/constants/routes'
 import { PatientsList } from './components/patients-list/patients-list'
 
 export function PatientsPage() {
+  let isDarkMode = matchMedia('(prefers-color-scheme: dark)').matches
+
   return (
     <IonPage>
       <IonHeader>
@@ -23,24 +25,29 @@ export function PatientsPage() {
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
-        <main className="w-full h-full flex flex-col items-center pt-4">
-          <header className="w-full flex flex-col items-center justify-center">
-            <IonText className="text-center">
-              <h1 className="text-3xl">Pacientes</h1>
+        <main>
+          <header
+            slot="fixed"
+            className={`pt-10 pb-5 ${isDarkMode ? 'bg-bg-datetime-customized-color-dark' : 'bg-bg-datetime-customized-color-light'}`}
+          >
+            <span className="ml-4 font-bold text-lg">Buscar paciente</span>
+            <IonText className="">
+              <IonSearchbar
+                mode="ios"
+                placeholder="Cédula de identidad"
+              ></IonSearchbar>
             </IonText>
-            <div className="w-full mt-5 mb-4 flex flex-col items-center max-w-xl px-8">
-              <p className="text-lg">Busque a un paciente</p>
-              <IonSearchbar placeholder="Cédula de Identidad"></IonSearchbar>
-            </div>
           </header>
+          <h1 className="ml-4 text-xl font-bold">Lista de Pacientes</h1>
+          <section className="w-full h-full flex flex-col items-center">
+            <PatientsList />
 
-          <PatientsList />
-
-          <IonFab className="fixed bottom-5 right-6">
-            <IonFabButton routerLink={ROUTES.APP.PATIENTS.PREREGISTER.PATH}>
-              <IonIcon icon={add}></IonIcon>
-            </IonFabButton>
-          </IonFab>
+            <IonFab className="fixed bottom-5 right-6">
+              <IonFabButton routerLink={ROUTES.APP.PATIENTS.PREREGISTER.PATH}>
+                <IonIcon icon={add}></IonIcon>
+              </IonFabButton>
+            </IonFab>
+          </section>
         </main>
       </IonContent>
     </IonPage>

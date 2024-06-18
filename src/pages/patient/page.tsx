@@ -65,53 +65,61 @@ export function PatientPage() {
           <main className="flex flex-col w-full h-full pt-7 px-4 items-center max-w-3xl m-auto">
             <IonText className="text-center flex flex-col gap-2 text-balance">
               {data.fullName ? (
-                <h1 className="font-semibold my-0 text-3xl">{data.fullName}</h1>
+                <h1 className="font-semibold my-0 text-2xl">{data.fullName}</h1>
               ) : (
-                <h1 className="font-semibold my-0 text-3xl opacity-50">
+                <h1 className="font-semibold my-0 text-2xl opacity-50">
                   Nombre sin registrar.
                 </h1>
               )}
-              <h2 className="text-xl my-0">CI - {data.nationalId}</h2>
+              <h2 className="text-lg mt-0 text-text-color-step-400">
+                CI - {data.nationalId}
+              </h2>
             </IonText>
 
             {data.age ? (
-              <IonChip className="w-[fit-content] mt-5 text-lg">
+              <IonChip className="w-[fit-content] font-bold" color="primary">
                 {data.age} años
               </IonChip>
             ) : (
-              <IonChip className="w-[fit-content] mt-5 text-lg text-opacity-50">
-                Edad sin registrar.
+              <IonChip className="w-[fit-content] font-bold text-opacity-50">
+                Edad sin registrar
               </IonChip>
             )}
 
             <section className="flex w-full justify-evenly">
               <div>
                 <IonText className="text-center">
-                  <h3>Peso</h3>
+                  <h2 className="text-base text-text-color-step-400 mb-0">
+                    Peso
+                  </h2>
                   {data.weightInKg ? (
-                    <p>{data.weightInKg}</p>
+                    <p className="text-xl font-bold">{data.weightInKg} kg</p>
                   ) : (
-                    <p className="opacity-50">Sin registrar.</p>
+                    <p className="opacity-50">Sin registrar</p>
                   )}
                 </IonText>
               </div>
               <div>
                 <IonText className="text-center">
-                  <h3>Altura</h3>
+                  <h2 className="text-base text-text-color-step-400 mb-0">
+                    Altura
+                  </h2>
                   {data.heightInCm ? (
-                    <p>{data.heightInCm}</p>
+                    <p className="text-xl font-bold">{data.heightInCm} cm</p>
                   ) : (
-                    <p className="opacity-50">Sin registrar.</p>
+                    <p className="opacity-50">Sin registrar</p>
                   )}
                 </IonText>
               </div>
               <div>
                 <IonText className="text-center">
-                  <h3>IMC</h3>
+                  <h2 className="text-base text-text-color-step-400 mb-0">
+                    IMC
+                  </h2>
                   {data.bmi ? (
-                    <p>{data.bmi.toFixed(1)}</p>
+                    <p className="text-xl font-bold">{data.bmi.toFixed(1)}</p>
                   ) : (
-                    <p className="opacity-50">Sin registrar.</p>
+                    <p className="opacity-50">Sin registrar</p>
                   )}
                 </IonText>
               </div>
@@ -119,14 +127,14 @@ export function PatientPage() {
 
             <section className="w-full mt-6">
               <IonText className="text-left">
-                <h2 className="text-3xl font-bold">Tratamiento</h2>
+                <h2 className="ml-4 text-xl font-bold">Tratamiento</h2>
               </IonText>
               {data.treatment?.medicaments?.length > 0 ? (
                 <TreatmentMedicamentsList
                   treatmentMedicaments={data.treatment.medicaments}
                 />
               ) : (
-                <p className="opacity-50">
+                <p className="ml-4 opacity-50">
                   Este paciente no tiene tratamiento asignado.
                 </p>
               )}

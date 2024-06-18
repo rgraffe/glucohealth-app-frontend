@@ -10,6 +10,7 @@ import {
   IonCardSubtitle,
   IonCardContent,
   IonIcon,
+  IonButton,
 } from '@ionic/react'
 import { person } from 'ionicons/icons'
 import { ROUTES } from '~/shared/constants/routes'
@@ -29,14 +30,16 @@ export function DashboardPage() {
             <img src={patientsImg}></img>
             <IonCardHeader>
               <IonCardTitle>Pacientes</IonCardTitle>
-              <IonCardSubtitle>Visitar sección</IonCardSubtitle>
               <IonIcon icon={person} slot="end" />
             </IonCardHeader>
             <IonCardContent className="-mt-2">
-              Podrás ver la lista de pacientes y buscar a un paciente por su
-              C.I. Además de poder añadir a nuevos pacientes y asignarle
-              tratamientos a los ya existentes.
+              Ver la lista de pacientes, buscar a un paciente por su
+              C.I., añadir nuevos pacientes y asignar
+              tratamientos.
             </IonCardContent>
+            <div className="flex justify-end">
+              <IonButton fill="clear">Visitar sección</IonButton>
+            </div>
           </IonCard>
         </main>
       </IonContent>

@@ -5,7 +5,7 @@ import {
   IonTabButton,
   IonTabs,
 } from '@ionic/react'
-import { home, person, settings } from 'ionicons/icons'
+import { home, idCard, person, settings } from 'ionicons/icons'
 import { ROUTES } from '~/shared/constants/routes'
 
 interface Props {
@@ -23,11 +23,11 @@ export function TabsLayout({ children }: Props) {
           <IonLabel>Panel</IonLabel>
         </IonTabButton>
         <IonTabButton tab="patients" href={ROUTES.APP.PATIENTS.PATH}>
-          <IonIcon aria-hidden="true" icon={person} />
+          <IonIcon aria-hidden="true" icon={idCard} />
           <IonLabel>Pacientes</IonLabel>
         </IonTabButton>
         <IonTabButton tab="profile" href={ROUTES.APP.SETTINGS.PATH}>
-          <IonIcon aria-hidden="true" icon={settings} />
+          <IonIcon aria-hidden="true" icon={person} />
           <IonLabel>Perfil</IonLabel>
         </IonTabButton>
       </IonTabBar>
