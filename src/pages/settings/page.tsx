@@ -5,7 +5,11 @@ import {
   IonTitle,
   IonContent,
   IonButton,
+  IonText,
+  IonIcon,
+  IonChip,
 } from '@ionic/react'
+import { callOutline, mailOutline } from 'ionicons/icons'
 import { useHistory } from 'react-router'
 import { logout } from '~/features/auth/model/auth'
 import { useStore } from '~/shared/store/store'
@@ -24,23 +28,47 @@ export function SettingsPage() {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Perfil de enfermero</IonTitle>
+          <IonTitle>Perfil</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
-        <main className="w-full h-full flex flex-col px-4 pb-5 justify-between items-center max-w-xl m-auto">
+        <main className="flex flex-col w-full h-full pt-7 px-4 items-center max-w-3xl m-auto">
           <section>
-            <h1 className="text-xl opacity-70">Información personal</h1>
-            <ul className="text-xl text-center">
-              <li className="text-4xl">{user?.fullName}</li>
-              <li className="text-2xl">CI - {user?.nationalId}</li>
-              <li className="text-xl">{user?.email}</li>
-              <li className="text-xl">{user?.phoneNumber}</li>
-            </ul>
+            <IonText className="text-center flex flex-col text-balance">
+              <h1 className="font-semibold my-0 text-2xl">{user?.fullName}</h1>
+              <h2 className="text-lg mt-0 text-text-color-step-400">
+                CI - {user?.nationalId}
+              </h2>
+              <IonChip className="w-[fit-content] font-bold" color="primary">
+                Enfermero
+              </IonChip>
+            </IonText>
           </section>
-          <IonButton onClick={logoutAndRedirect} className="w-full">
-            Cerrar sesión
-          </IonButton>
+          <section className="mt-5 ml-2 w-screen pl-3">
+            <h2 className="text-lg font-bold mb-1">Número de teléfono</h2>
+            <p>
+              <IonIcon
+                icon={callOutline}
+                color="current"
+                className="mr-2"
+              ></IonIcon>
+              {user?.phoneNumber}
+            </p>
+            <h2 className="text-lg font-bold mb-1 mt-7">Correo electrónico</h2>
+            <p>
+              <IonIcon
+                icon={mailOutline}
+                color="current"
+                className="mr-2"
+              ></IonIcon>
+              {user?.email}
+            </p>
+          </section>
+          <section className="mt-40">
+            <IonButton onClick={logoutAndRedirect} className="w-full">
+              Cerrar sesión
+            </IonButton>
+          </section>
         </main>
       </IonContent>
     </IonPage>
