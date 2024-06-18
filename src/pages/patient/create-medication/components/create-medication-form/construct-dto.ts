@@ -1,6 +1,7 @@
 import { UpdateTreatmentDto } from '~/features/treatments/dto/update'
 import { Treatment, TreatmentMedicament } from '~/shared/types/treatment'
 import { CreateMedicationFormValues } from './create-medication-form'
+import { toIsoString } from '~/shared/utils/construct-date-string'
 
 export function constructUpdateTreatmentDto(
   treatment: Treatment,
@@ -26,7 +27,7 @@ export function constructUpdateTreatmentDto(
   let newMedicament: Partial<TreatmentMedicament> = {
     dose,
     medicamentId: medicamentId!,
-    takingSchedulesStartingTimestamp: initialDate.toISOString(),
+    takingSchedulesStartingTimestamp: toIsoString(initialDate),
   }
 
   if (reminderType === 'fixed') {
@@ -104,7 +105,7 @@ export function constructUpdateTreatmentDto(
       const finalDate = new Date(initialDate)
       finalDate.setDate(initialDate.getDate() + intervalShotsQuantity)
 
-      newMedicament.takingSchedulesEndingTimestamp = finalDate.toISOString()
+      newMedicament.takingSchedulesEndingTimestamp = toIsoString(finalDate)
     }
   }
 
