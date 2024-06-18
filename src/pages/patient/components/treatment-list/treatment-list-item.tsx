@@ -8,9 +8,13 @@ import { TreatmentMedicament } from '~/shared/types/treatment'
 
 interface Props {
   treatmentMedicament: TreatmentMedicament
+  deleteMedicament: (medicamentId: number) => void
 }
 
-export function TreatmentMedicamentsListItem({ treatmentMedicament }: Props) {
+export function TreatmentMedicamentsListItem({
+  treatmentMedicament,
+  deleteMedicament,
+}: Props) {
   const { data } = useQuery({
     queryKey: [
       `${QUERY_KEYS.MEDICAMENT_INFO}-${treatmentMedicament.medicamentId}`,
@@ -19,7 +23,7 @@ export function TreatmentMedicamentsListItem({ treatmentMedicament }: Props) {
   })
 
   return (
-    <IonCard className='pb-4 pt-2'>
+    <IonCard className="pb-4 pt-2">
       <header>
         <IonText className="flex items-center">
           <div className="w-[30%]"></div>
@@ -27,6 +31,7 @@ export function TreatmentMedicamentsListItem({ treatmentMedicament }: Props) {
 
           <div className="flex justify-end flex-grow pr-5 pt-3">
             <IonIcon
+              onClick={() => deleteMedicament(treatmentMedicament.medicamentId)}
               className="hover:cursor-pointer"
               icon={trash}
               size="large"

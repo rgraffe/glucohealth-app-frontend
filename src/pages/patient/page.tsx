@@ -140,6 +140,7 @@ export function PatientPage() {
               </div>
               {data.treatment?.medicaments?.length > 0 ? (
                 <TreatmentMedicamentsList
+                  treatmentId={data.treatment.id}
                   treatmentMedicaments={data.treatment.medicaments}
                 />
               ) : (
