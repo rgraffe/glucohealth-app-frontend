@@ -34,7 +34,9 @@ export async function getPatientTreatmentByDate(
         dose: treatment.dose,
         schedule: treatment.schedule.map(schedule => ({
           expectedTakingTimestamp: new Date(schedule.expectedTakingTimestamp),
-          actualTakingTimestamp: new Date(schedule.actualTakingTimestamp),
+          actualTakingTimestamp: schedule.actualTakingTimestamp
+            ? new Date(schedule.actualTakingTimestamp)
+            : null,
         })),
       }
     }),
