@@ -13,9 +13,12 @@ import {
 import { add } from 'ionicons/icons'
 import { ROUTES } from '~/shared/constants/routes'
 import { PatientsList } from './components/patients-list/patients-list'
+import { useState } from 'react'
 
 export function PatientsPage() {
   let isDarkMode = matchMedia('(prefers-color-scheme: dark)').matches
+
+  const [nationalId, setNationalId] = useState('')
 
   return (
     <IonPage>
@@ -35,12 +38,13 @@ export function PatientsPage() {
               <IonSearchbar
                 mode="ios"
                 placeholder="Cédula de identidad"
+                onIonInput={e => setNationalId(e.detail.value!)}
               ></IonSearchbar>
             </IonText>
           </header>
           <h1 className="ml-4 text-xl font-bold">Lista de Pacientes</h1>
           <section className="w-full h-full flex flex-col items-center">
-            <PatientsList />
+            <PatientsList nationalId={nationalId} />
 
             <IonFab className="fixed bottom-5 right-6">
               <IonFabButton routerLink={ROUTES.APP.PATIENTS.PREREGISTER.PATH}>

@@ -9,14 +9,18 @@ import { PaginationParams } from '~/shared/types/dto/pagination-params'
 export async function getPaginatedPatients({
   pageIndex,
   itemsPerPage,
-}: PaginationParams) {
+  nationalId,
+}: PaginationParams & { nationalId: string }) {
+  const params: Record<string, string | number> = { pageIndex, itemsPerPage }
+
+  if (nationalId) {
+    params.nationalId = nationalId
+  }
+
   const res = await axiosClient.get<BackendResponse<PaginatedItems<Patient>>>(
     PATIENTS_BACKEND_URL,
     {
-      params: {
-        pageIndex,
-        itemsPerPage,
-      },
+      params,
       validateStatus: status => status === HttpStatusCode.Ok,
     },
   )
