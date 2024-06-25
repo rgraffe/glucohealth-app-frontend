@@ -97,3 +97,8 @@
 ::-ms-reveal {
   display: none;
 }
+
+ion-input.md.input-disabled,
+ion-input.ios.input-disabled {
+  opacity: 1;
+}

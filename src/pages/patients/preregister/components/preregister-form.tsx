@@ -68,7 +68,7 @@ export function PreregisterForm() {
         name="nationalId"
         fill="outline"
         labelPlacement="stacked"
-        label="Número único de identificación"
+        label="Cédula de identidad"
         errorText={errors.nationalId}
         className={`max-w-xl ${errors.nationalId ? 'ion-invalid' : ''} ${touched.nationalId && 'ion-touched'}`}
         mode="md"

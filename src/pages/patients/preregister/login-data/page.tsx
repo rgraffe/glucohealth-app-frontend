@@ -52,6 +52,7 @@ export function PatientPreregisterLoginDataPage() {
                 label="Correo electrónico"
                 labelPlacement="stacked"
                 value={email}
+                disabled={true}
               />
             </div>
             <div className="flex items-center">
@@ -60,15 +61,16 @@ export function PatientPreregisterLoginDataPage() {
                 label="Contraseña (Provisional)"
                 labelPlacement="stacked"
                 value={password}
+                disabled={true}
               />
             </div>
           </section>
 
           <section className="flex justify-center items-center w-full mt-5">
-            <IonTextarea className="text-center" disabled={true}>
-              Los datos también serán enviados al correo electrónico del
+            <p className="text-center">
+              Estos datos también serán enviados al correo electrónico del
               usuario.
-            </IonTextarea>
+            </p>
           </section>
 
           <IonButton routerLink={ROUTES.APP.PATIENTS.PATH}>
